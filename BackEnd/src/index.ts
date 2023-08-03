@@ -1,11 +1,10 @@
-import * as express from "express"
-import { Request, Response } from "express"
+import * as express from 'express';
+import { Request, Response } from 'express';
 
+const app = express();
 
-const app = express()
+app.get('/', (req: Request, res: Response) => {
+  res.send('hello mark, king of zap zap');
+});
 
-app.get("/", (req: Request, res: Response) => {
-  res.send('hello mark, king of zap zap')
-})
-
-app.listen(3000, () => console.log("listening on port 3000!"))
+app.listen(3000, () => console.log('listening on port 3000!'));
