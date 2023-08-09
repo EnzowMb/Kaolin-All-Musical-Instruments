@@ -1,10 +1,21 @@
-import * as express from 'express';
-import { Request, Response } from 'express';
+import express from 'express';
+import { exampleRoute } from './routes/ExampleRoute';
+import swaggerUI from 'swagger-ui-express';
+import swaggerJson from './swagger.json';
 
 const app = express();
+const port = 3000;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('hello world');
-});
+app.use(express.json());
 
-app.listen(3000, () => console.log('listening on port 3000!'));
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJson));
+
+app.use('/example', exampleRoute);
+
+app.listen(port, () => console.log(`API listening on port ${port}!`));
