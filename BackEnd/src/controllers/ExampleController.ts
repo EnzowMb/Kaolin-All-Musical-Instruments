@@ -12,3 +12,14 @@ export const sayHello = (req: Request, res: Response) => {
     return res.json(error);
   }
 };
+
+export const sayVasco = (req: Request, res: Response) => {
+  try {
+    const { name } = req.body as ExampleType;
+    Validation.ExampleSchema.parse({ name: name });
+    const exampleModel = new ExampleModel(name);
+    return res.json({ message: exampleModel.sayVasco(name) });
+  } catch (error: any) {
+    return res.json(error);
+  }
+};
