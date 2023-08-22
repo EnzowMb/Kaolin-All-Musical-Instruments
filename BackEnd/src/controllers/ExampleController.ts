@@ -1,6 +1,8 @@
 import { ExampleModel } from '../model/ExampleModel';
 import { Request, Response } from 'express';
 import { ExampleType, Validation } from '../services/Validation';
+import { PrismaClient } from '@prisma/client';
+import { instrumentRepository } from '../repositories/InstrumentRepository';
 
 export const sayHello = (req: Request, res: Response) => {
   try {
@@ -22,4 +24,14 @@ export const sayVasco = (req: Request, res: Response) => {
   } catch (error: any) {
     return res.json(error);
   }
+};
+
+export const teste = async (req: Request, res: Response) => {
+  // const instrumentos = await prisma.instrument.create({
+  //   data: { name: 'teste2', family: 'prisma' },
+  //   select: { id: false, name: true, family: true },
+  // });
+
+  const instrumentos = await instrumentRepository.findMany();
+  res.json(instrumentos);
 };
