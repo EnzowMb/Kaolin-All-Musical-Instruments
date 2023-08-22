@@ -12,4 +12,8 @@ export class Validation {
       .string({ required_error: 'Necessita de email' })
       .email({ message: 'Email invalido' }),
   });
+
+  static InstrumentSchema = z.object({
+    name: z.string().min(3, { message: 'minimum 2 digits' })
+  });
 }
