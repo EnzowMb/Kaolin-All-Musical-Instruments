@@ -14,10 +14,17 @@ export class InstrumentController {
           name: instrumentModel.getName(),
           family: instrumentModel.getFamily(),
         },
+        select: {
+          id: false,
+          name: true,
+          family: true,
+        },
       });
       return res.status(201).json(newInstrument);
     } catch (error: any) {
       return res.json(error);
     }
   };
+
+  getAllInstrument = async (req: Request, res: Response) => {};
 }
