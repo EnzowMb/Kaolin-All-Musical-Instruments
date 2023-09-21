@@ -16,7 +16,7 @@ export class InstrumentService {
     });
   };
 
-  getAllInstrument = async () => {
-    return await instrumentRepository.findMany();
+  getAllInstrument = () => {
+    return instrumentRepository.findMany();
   };
 }

@@ -24,5 +24,12 @@ export class InstrumentController {
     }
   };
 
-  getAllInstrument = async (req: Request, res: Response) => {};
+  getAllInstrument = async (req: Request, res: Response) => {
+    try {
+      const instruments = await this.instrumentService.getAllInstrument();
+      res.status(200).json(instruments);
+    } catch (error) {
+      return res.json(error);
+    }
+  };
 }
