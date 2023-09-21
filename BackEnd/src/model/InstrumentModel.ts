@@ -1,9 +1,9 @@
 import { EfamilyInstrument } from './EfamilyInstrument';
 
 export class Instrument {
-  constructor(private name: string, private familia: EfamilyInstrument) {
+  constructor(private name: string, private family: EfamilyInstrument) {
     this.name = name;
-    this.familia = familia;
+    this.family = family;
   }
 
   getName(): string {
@@ -11,6 +11,6 @@ export class Instrument {
   }
 
   getFamilia(): EfamilyInstrument {
-    return this.familia;
+    return this.family;
   }
 }

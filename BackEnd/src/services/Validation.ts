@@ -1,6 +1,9 @@
 import { z } from 'zod';
+import { EfamilyInstrument } from '../model/EfamilyInstrument';
 
 export type ExampleType = z.infer<typeof Validation.ExampleSchema>;
+
+export type InstrumentType = z.infer<typeof Validation.InstrumentSchema>;
 
 export class Validation {
   static ExampleSchema = z.object({
@@ -14,6 +17,10 @@ export class Validation {
   });
 
   static InstrumentSchema = z.object({
-    name: z.string().min(3, { message: 'minimum 2 digits' })
+    name: z
+      .string()
+      .min(3, { message: 'minimum 2 digits' })
+      .max(40, { message: 'maximum 40 digits' }),
+    family: z.nativeEnum(EfamilyInstrument),
   });
 }
