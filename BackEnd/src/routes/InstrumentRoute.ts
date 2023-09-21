@@ -4,6 +4,6 @@ import { InstrumentController } from '../controllers/InstrumentController';
 const router = Router();
 const instrumentController = new InstrumentController();
 
-router.get('/', instrumentController.createInstrument);
+router.post('/create', instrumentController.createInstrument);
 
 export const instrumentRoute = router;

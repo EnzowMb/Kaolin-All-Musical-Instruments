@@ -10,7 +10,7 @@ export class Instrument {
     return this.name;
   }
 
-  getFamilia(): EfamilyInstrument {
+  getFamily(): EfamilyInstrument {
     return this.family;
   }
 }
