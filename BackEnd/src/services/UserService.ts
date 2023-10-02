@@ -2,6 +2,10 @@ import { User } from '../model/UserModel';
 import { userRepository } from '../repositories/UserRepository';
 
 export class UserService {
+  findByEmail = (email: string) => {
+    return userRepository.findUnique({ where: { email } });
+  };
+
   createUser = (user: User) => {
     return userRepository.create({
       data: {
