@@ -1,3 +1,3 @@
 import { prismaClient } from './PrismaClient';
 
-prismaClient;
+export const userRepository = prismaClient.user;
