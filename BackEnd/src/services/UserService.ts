@@ -2,8 +2,8 @@ import { User } from '../model/UserModel';
 import { userRepository } from '../repositories/UserRepository';
 
 export class UserService {
-  findByEmail = (email: string) => {
-    return userRepository.findUnique({ where: { email } });
+  findByEmailAndPassword = (email: string, password: string) => {
+    return userRepository.findUnique({ where: { email, password } });
   };
 
   createUser = (user: User) => {
@@ -25,4 +25,6 @@ export class UserService {
   getAllUser = () => {
     return userRepository.findMany();
   };
+
+  getToken = () => {};
 }

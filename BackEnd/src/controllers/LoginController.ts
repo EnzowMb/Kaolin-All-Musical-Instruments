@@ -18,7 +18,10 @@ export class LoginController {
         password: password,
       });
 
-      const user = await this.userService.findByEmail(email);
+      const user = await this.userService.findByEmailAndPassword(
+        email,
+        password
+      );
 
       const tokenData = {
         email: email,
