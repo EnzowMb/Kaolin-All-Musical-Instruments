@@ -27,6 +27,12 @@ export class UserService {
     return userRepository.findMany();
   };
 
+  getUser = (userId: string) => {
+    return userRepository.findUnique({
+      where: { id: userId },
+    });
+  };
+
   getToken = async (email: string, password: string) => {
     const user = await this.findByEmailAndPassword(email, password);
 
