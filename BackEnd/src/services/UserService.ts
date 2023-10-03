@@ -1,5 +1,6 @@
 import { User } from '../model/UserModel';
 import { userRepository } from '../repositories/UserRepository';
+import { sign } from 'jsonwebtoken';
 
 export class UserService {
   findByEmailAndPassword = (email: string, password: string) => {
@@ -26,5 +27,22 @@ export class UserService {
     return userRepository.findMany();
   };
 
-  getToken = () => {};
+  getToken = async (email: string, password: string) => {
+    const user = await this.findByEmailAndPassword(email, password);
+
+    const tokenData = {
+      email: email,
+      password: password,
+    };
+
+    const tokenKey = '1234'; //Guardar senhar em uma variavel!
+
+    const tokenOptions = {
+      subject: user?.id,
+    };
+
+    const token = sign(tokenData, tokenKey, tokenOptions);
+
+    return token;
+  };
 }
