@@ -34,4 +34,14 @@ export class UserController {
       return res.json(error);
     }
   };
+
+  getUser = async (req: Request, res: Response) => {
+    try {
+      const { userId } = req.params;
+      const user = await this.userService.getUser(userId);
+      res.status(200).json(user);
+    } catch (error: any) {
+      return res.json(error);
+    }
+  };
 }
