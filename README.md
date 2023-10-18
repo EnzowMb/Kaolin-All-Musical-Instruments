@@ -28,6 +28,13 @@ MongoDB
 
 [![My Skills](https://skillicons.dev/icons?i=mongo)](https://skillicons.dev)
 
+ORM utilizada:
+```bash
+Prisma
+```
+
+[![My Skills](https://skillicons.dev/icons?i=prisma)](https://skillicons.dev)
+
 Dependências Frontend:
 
 ```bash
