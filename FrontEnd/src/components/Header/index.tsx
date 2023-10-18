@@ -1,4 +1,5 @@
-import OpcaoHeader from "../OptionsHeader";
+import { LogoHeader } from "../LogoHeader";
+import { OpcaoHeader } from "../OptionsHeader";
 import "./header.css";
 
 // const HeaderContainer = styled.header`
@@ -9,9 +10,10 @@ import "./header.css";
 
 const Header = () => {
   return (
-    <div className="header">
+    <header className="header">
+      <LogoHeader />
       <OpcaoHeader />
-    </div>
+    </header>
   );
 };
 

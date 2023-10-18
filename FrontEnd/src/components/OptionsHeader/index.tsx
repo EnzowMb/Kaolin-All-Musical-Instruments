@@ -18,16 +18,14 @@ const textoOpcoes = ["CORDAS", "MADEIRAS", "METAIS", "PERCUSSAO"];
 //     min-width: 120px;
 // `
 
-const OpcaoHeader = () => {
+export const OpcaoHeader = () => {
   return (
-    <div className="options">
+    <ul className="options">
       {textoOpcoes.map((texto) => (
-        <div className="option">
+        <li className="option">
           <p>{texto}</p>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
-
-export default OpcaoHeader;
