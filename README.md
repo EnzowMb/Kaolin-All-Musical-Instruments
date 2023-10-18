@@ -8,7 +8,9 @@
 
 ## Objetivo
 
-Todos os instrumentos musicais em um site!
+Projeto FullStack
+
+Registrar todos(ou pelo menos a maioria) os instrumentos musicais em um site!
 
 ## 🔨 Tecnologias utilizadas:
 
