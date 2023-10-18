@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { InstrumentType, Validation } from '../services/Validation';
 import { Instrument } from '../model/InstrumentModel';
 import { InstrumentService } from '../services/InstrumentService';
@@ -28,6 +28,18 @@ export class InstrumentController {
     try {
       const instruments = await this.instrumentService.getAllInstrument();
       res.status(200).json(instruments);
+    } catch (error) {
+      return res.json(error);
+    }
+  };
+
+  getInstrumentFilter = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const search = processSearch(req.query);
     } catch (error) {
       return res.json(error);
     }

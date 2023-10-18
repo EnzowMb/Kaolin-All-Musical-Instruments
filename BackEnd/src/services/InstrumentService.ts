@@ -19,4 +19,6 @@ export class InstrumentService {
   getAllInstrument = () => {
     return instrumentRepository.findMany();
   };
+
+  getInstrumentFilter = () => {};
 }
