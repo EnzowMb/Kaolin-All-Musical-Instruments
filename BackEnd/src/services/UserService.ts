@@ -1,3 +1,4 @@
+import { hash } from 'bcrypt';
 import { User } from '../model/UserModel';
 import { userRepository } from '../repositories/UserRepository';
 import { sign } from 'jsonwebtoken';
@@ -7,20 +8,32 @@ export class UserService {
     return userRepository.findUnique({ where: { email, password } });
   };
 
-  createUser = (user: User) => {
-    return userRepository.create({
-      data: {
-        name: user.getName(),
+  createUser = async (user: User) => {
+    const userExist = await userRepository.findUnique({
+      where: {
         email: user.getEmail(),
-        password: user.getPassword(),
-      },
-      select: {
-        id: false,
-        name: true,
-        email: true,
-        password: false,
       },
     });
+
+    if (!userExist) {
+      const passwordHash = await hash(user.getPassword(), 8); //8 -> saltRounds
+
+      return await userRepository.create({
+        data: {
+          name: user.getName(),
+          email: user.getEmail(),
+          password: passwordHash,
+        },
+        select: {
+          id: false,
+          name: true,
+          email: true,
+          password: false,
+        },
+      });
+    } else {
+      return null;
+    }
   };
 
   getAllUser = () => {
