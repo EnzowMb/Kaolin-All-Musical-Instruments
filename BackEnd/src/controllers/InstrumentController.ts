@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import { InstrumentType, Validation } from '../services/Validation';
 import { Instrument } from '../model/InstrumentModel';
 import { InstrumentService } from '../services/InstrumentService';
+import { EfamilyInstrument } from '../model/EfamilyInstrument';
+import { instrumentRepository } from '../repositories/InstrumentRepository';
 
 export class InstrumentController {
   instrumentService: InstrumentService;
@@ -33,13 +35,25 @@ export class InstrumentController {
     }
   };
 
-  getInstrumentFilter = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+  getInstrumentFilterString = async (req: Request, res: Response) => {
     try {
-      const search = processSearch(req.query);
+      let { string } = req.query;
+
+      EfamilyInstrument[string as keyof typeof EfamilyInstrument];
+
+      console.log(string);
+
+      if (!Object.keys(EfamilyInstrument).includes(string as EfamilyInstrument))
+        throw new Error('category not found');
+
+      if (string !== null) {
+        const instrumentsResult =
+          await this.instrumentService.getInstrumentFilterString(
+            string as EfamilyInstrument
+          );
+
+        res.status(200).json(instrumentsResult);
+      }
     } catch (error) {
       return res.json(error);
     }

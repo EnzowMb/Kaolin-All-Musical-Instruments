@@ -1,3 +1,5 @@
 Toda vez que mudar a config no prisma, o esquema do banco, é para dar yarn prisma generate
 
 SERVER PARADO!!
+
+depois yarn prisma db pull

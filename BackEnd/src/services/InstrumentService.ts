@@ -1,9 +1,10 @@
+import { EfamilyInstrument } from '../model/EfamilyInstrument';
 import { Instrument } from '../model/InstrumentModel';
 import { instrumentRepository } from '../repositories/InstrumentRepository';
 
 export class InstrumentService {
-  createInstrument = (instrument: Instrument) => {
-    return instrumentRepository.create({
+  createInstrument = async (instrument: Instrument) => {
+    return await instrumentRepository.create({
       data: {
         name: instrument.getName(),
         family: instrument.getFamily(),
@@ -20,5 +21,7 @@ export class InstrumentService {
     return instrumentRepository.findMany();
   };
 
-  getInstrumentFilter = () => {};
+  getInstrumentFilterString = async (string: EfamilyInstrument) => {
+    return instrumentRepository.findMany({ where: { family: string } });
+  };
 }
