@@ -41,8 +41,6 @@ export class InstrumentController {
 
       EfamilyInstrument[string as keyof typeof EfamilyInstrument];
 
-      console.log(string);
-
       if (!Object.keys(EfamilyInstrument).includes(string as EfamilyInstrument))
         throw new Error('category not found');
 
