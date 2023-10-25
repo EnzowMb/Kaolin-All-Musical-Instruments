@@ -1,4 +1,5 @@
 import "./optionsHeader.css";
+import { Link } from "react-router-dom";
 
 const textoOpcoes = ["CORDAS", "MADEIRAS", "METAIS", "PERCUSSAO"];
 
@@ -22,9 +23,11 @@ export const OpcaoHeader = () => {
   return (
     <ul className="options">
       {textoOpcoes.map((texto) => (
-        <li className="option">
-          <p>{texto}</p>
-        </li>
+        <Link to={`${texto.toLowerCase().split(" ").join("")}`}>
+          <li className="option">
+            <p>{texto}</p>
+          </li>
+        </Link>
       ))}
     </ul>
   );

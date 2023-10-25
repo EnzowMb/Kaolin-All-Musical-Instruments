@@ -1,17 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Header from "./components/Header";
 import { Home } from "./routes/Home";
+import { WoodWind } from "./routes/WoodWind";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Header />
-    <Home />
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/madeiras" element={<WoodWind />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

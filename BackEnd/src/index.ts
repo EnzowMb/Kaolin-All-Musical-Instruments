@@ -5,9 +5,10 @@ import swaggerJson from './swagger.json';
 import { instrumentRoute } from './routes/InstrumentRoute';
 import { userRoute } from './routes/UserRoute';
 import { loginRoute } from './routes/LoginRoute';
+import cors from 'cors';
 
 const app = express();
-const port = 3000;
+const port = 8000;
 
 app.use(express.json());
 
@@ -16,6 +17,8 @@ app.use(
     extended: true,
   })
 );
+
+app.use(cors({ origin: '*' }));
 
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJson));
 
