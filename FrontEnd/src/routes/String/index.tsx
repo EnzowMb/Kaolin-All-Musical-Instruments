@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getInstruments } from "../../services/instrumentTypeService";
 import { Instrument } from "../type";
+import { InstrumentCard } from "../../components/InstrumentCard";
 
 export const String = () => {
   const [instruments, setInstruments] = useState<Instrument[]>([]);
@@ -17,7 +18,7 @@ export const String = () => {
   return (
     <div>
       {instruments.map((instrument) => (
-        <p>{instrument.name}</p>
+        <InstrumentCard name={instrument.name} family={instrument.family} />
       ))}
     </div>
   );

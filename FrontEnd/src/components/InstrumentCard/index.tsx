@@ -1,6 +1,11 @@
 import "./style.css";
 
-export const CardRecomenda = ({ name, family }) => {
+interface InstrumentCardProps {
+  name: string;
+  family: string;
+}
+
+export const InstrumentCard = ({ name, family }: InstrumentCardProps) => {
   return (
     <div className="card">
       <div className="desc">
