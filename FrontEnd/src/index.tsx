@@ -6,6 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 import Header from "./components/Header";
 import { Home } from "./routes/Home";
 import { WoodWind } from "./routes/WoodWind";
+import { String } from "./routes/String";
+import { Percussion } from "./routes/Percussion";
+import { Brass } from "./routes/Brass";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -17,6 +20,9 @@ root.render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/madeiras" element={<WoodWind />} />
+        <Route path="/cordas" element={<String />} />
+        <Route path="/percussao" element={<Percussion />} />
+        <Route path="/metais" element={<Brass />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

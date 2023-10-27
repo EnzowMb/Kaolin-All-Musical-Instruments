@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
-import { getInstruments } from "../services/woodWind";
+import { getInstruments } from "../../services/instrumentTypeService";
+import { Instrument } from "../type";
 
-type Instrument = {
-  name: string;
-};
-
-export const WoodWind = () => {
+export const String = () => {
   const [instruments, setInstruments] = useState<Instrument[]>([]);
 
-  console.log("opa");
-
   async function fetchInstruments() {
-    const instrumentsAPI = await getInstruments();
+    const instrumentsAPI = await getInstruments("cordas");
     setInstruments(instrumentsAPI);
   }
 
