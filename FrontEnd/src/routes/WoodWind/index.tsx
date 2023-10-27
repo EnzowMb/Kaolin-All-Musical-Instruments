@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getInstruments } from "../../services/instrumentTypeService";
 import { Instrument } from "../type";
 import { InstrumentCard } from "../../components/InstrumentCard";
+import "./style.css";
 
 export const WoodWind = () => {
   const [instruments, setInstruments] = useState<Instrument[]>([]);
@@ -16,7 +17,7 @@ export const WoodWind = () => {
   }, []);
 
   return (
-    <div>
+    <div className="elements">
       {instruments.map((instrument) => (
         <InstrumentCard name={instrument.name} family={instrument.family} />
       ))}
