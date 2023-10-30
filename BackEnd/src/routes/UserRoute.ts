@@ -5,11 +5,9 @@ import { auth } from '../middlewares/auth';
 const router = Router();
 const userController = new UserController();
 
-router.use(auth);
-
 router
   .get('/', userController.getAllUsers)
-  .get('/:id', userController.getUser)
+  .get('/:id', auth, userController.getUser)
   .post('/create', userController.createUser);
 
 export const userRoute = router;

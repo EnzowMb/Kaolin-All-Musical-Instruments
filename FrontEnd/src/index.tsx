@@ -9,6 +9,8 @@ import { WoodWind } from "./pages/WoodWind";
 import { String } from "./pages/String";
 import { Percussion } from "./pages/Percussion";
 import { Brass } from "./pages/Brass";
+import { Login } from "./pages/Login";
+import { RegisterUser } from "./pages/Register-User";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -23,6 +25,8 @@ root.render(
         <Route path="/cordas" element={<String />} />
         <Route path="/percussao" element={<Percussion />} />
         <Route path="/metais" element={<Brass />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register-user" element={<RegisterUser />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

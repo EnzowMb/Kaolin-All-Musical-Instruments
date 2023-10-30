@@ -17,7 +17,7 @@ const Header = () => {
         <LogoHeader />
       </Link>
       <OpcaoHeader />
-      <Link to="/">
+      <Link to="/login">
         <UserHeader />
       </Link>
     </header>

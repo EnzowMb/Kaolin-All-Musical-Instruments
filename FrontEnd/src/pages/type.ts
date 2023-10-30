@@ -3,3 +3,9 @@ export interface Instrument {
   name: string;
   family: string;
 }
+
+export interface User {
+  name: string;
+  email: string;
+  password: string;
+}

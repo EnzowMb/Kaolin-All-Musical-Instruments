@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.content {
+  display: flex;
+  padding: 5rem 2rem 5rem 2rem;
+  flex-direction: column;
+  background-color: #f7fafe;
+  width: 30%;
+  border-radius: 5px;
+  border: 1px solid #ddecfa;
+  gap: 2rem;
+}
+
+.containerTitle {
+  display: flex;
+  flex-direction: row;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.containerBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.containerButtons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 2rem;
+  justify-content: flex-end;
+}
