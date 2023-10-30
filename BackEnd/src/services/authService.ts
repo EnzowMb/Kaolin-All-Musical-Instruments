@@ -1,12 +1,11 @@
 import { sign } from 'jsonwebtoken';
 import { jsonSecret } from '../jsonSecret';
-import { User } from '../model/UserModel';
 import { userRepository } from '../repositories/UserRepository';
 import { compare } from 'bcrypt';
 import { LoginType } from './Validation';
 
-export class authService {
-  static login = async (dto: LoginType) => {
+export class AuthService {
+  login = async (dto: LoginType) => {
     const user = await userRepository.findUnique({
       where: {
         email: dto.email,
@@ -20,7 +19,7 @@ export class authService {
     const senhasIguais = await compare(dto.password, user.password);
 
     if (!senhasIguais) {
-      throw new Error(`User or password mismatch`);
+      return null;
     }
 
     const acessToken = sign(
@@ -34,6 +33,6 @@ export class authService {
       }
     );
 
-    return acessToken;
+    return { acessToken };
   };
 }

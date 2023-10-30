@@ -19,7 +19,11 @@ export class LoginController {
 
       const token = await this.userService.getToken(email, password);
 
-      return res.status(200).json({ token });
+      if (token) {
+        return res.status(200).json({ token });
+      } else {
+        return res.status(401).send({ message: 'Invalid Credentials' });
+      }
     } catch (error: any) {
       return res.json(error);
     }

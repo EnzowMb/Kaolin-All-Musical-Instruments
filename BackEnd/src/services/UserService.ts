@@ -1,5 +1,6 @@
 import { hash } from 'bcrypt';
 import { User } from '../model/UserModel';
+import { jsonSecret } from '../jsonSecret';
 import { userRepository } from '../repositories/UserRepository';
 import { sign } from 'jsonwebtoken';
 
@@ -54,14 +55,13 @@ export class UserService {
       password: password,
     };
 
-    const tokenKey = '1234'; //Guardar senhar em uma variavel!
-
     const tokenOptions = {
       subject: user?.id,
     };
 
-    const token = sign(tokenData, tokenKey, tokenOptions);
+    const token = sign(tokenData, jsonSecret.secret, tokenOptions);
 
+    console.log('opa service');
     return token;
   };
 }
