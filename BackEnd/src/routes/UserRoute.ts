@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { UserController } from '../controllers/UserController';
-import { verifyAuth } from '../middlewares/verifyAuth';
 import { auth } from '../middlewares/auth';
 
 const router = Router();
@@ -10,7 +9,7 @@ router.use(auth);
 
 router
   .get('/', userController.getAllUsers)
-  .get('/:id', verifyAuth, userController.getUser)
+  .get('/:id', userController.getUser)
   .post('/create', userController.createUser);
 
 export const userRoute = router;
