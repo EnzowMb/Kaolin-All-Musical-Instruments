@@ -4,11 +4,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Header from "./components/Header";
-import { Home } from "./routes/Home";
-import { WoodWind } from "./routes/WoodWind";
-import { String } from "./routes/String";
-import { Percussion } from "./routes/Percussion";
-import { Brass } from "./routes/Brass";
+import { Home } from "./pages/Home";
+import { WoodWind } from "./pages/WoodWind";
+import { String } from "./pages/String";
+import { Percussion } from "./pages/Percussion";
+import { Brass } from "./pages/Brass";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
