@@ -12,5 +12,5 @@
 
 .userLogo:hover {
   transform: scale(1.1);
-  content: url("../../Img/User-Logo-gif.gif");
+  /* content: url("../../Img/User-Logo-gif.gif"); */
 }
