@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getInstruments } from "../../services/instrumentTypeService";
+import { getInstruments } from "../../services/instrumentService";
 import { Instrument } from "../type";
 import { InstrumentCard } from "../../components/InstrumentCard";
 import "./style.css";

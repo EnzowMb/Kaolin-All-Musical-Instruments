@@ -3,6 +3,8 @@ import "./style.css";
 import { SuccessModal } from "../../components/SuccessModal";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { TitledInput } from "../../components/TitledInput";
+import { Button } from "../../components/Button";
 
 export const RegisterUser: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -61,31 +63,36 @@ export const RegisterUser: React.FC = () => {
             <SuccessModal onClose={() => setShowSuccessModal(false)} />
           ) : (
             <>
-              <input
+              <TitledInput
+                label={"Name"}
                 type="text"
                 placeholder="Insira seu nome"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
               />
-              <input
+              <TitledInput
+                label={"Email"}
                 type="email"
                 placeholder="Email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
               />
-              <input
+              <TitledInput
+                label={"Senha"}
                 type="password"
                 placeholder="Senha"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
               />
-              <Link to={"/"}>
-                <button>Cancelar</button>
-              </Link>
-              <button type="submit">Cadastrar-se</button>
+              <div className="containerButtons">
+                <Link to={"/"}>
+                  <Button label={"Cancelar"} />
+                </Link>
+                <button type="submit">Cadastrar-se</button>
+              </div>
             </>
           )}
         </form>

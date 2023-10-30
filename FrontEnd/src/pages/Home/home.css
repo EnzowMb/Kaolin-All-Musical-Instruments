@@ -1,10 +1,12 @@
 .appContainer {
   width: 100%;
-  height: 100vh;
-  background-image: linear-gradient(90deg, #7094b7 35%, #c6b3b0);
+  height: 100%;
+  background-image: linear-gradient(90deg, #2a2f34d2 35%, #858e5f);
 }
 
-p {
-  padding: 0%;
-  margin: 0%;
+.elements {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }

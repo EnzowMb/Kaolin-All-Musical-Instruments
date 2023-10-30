@@ -3,6 +3,8 @@ import { IUser } from "./types";
 import { getUser } from "../../services/userService";
 import { Link } from "react-router-dom";
 import "./style.css";
+import { TitledInput } from "../../components/TitledInput";
+import { Button } from "../../components/Button";
 
 export const Login: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -56,15 +58,17 @@ export const Login: React.FC = () => {
         </div>
 
         <div className="containerBody">
-          <input
+          <TitledInput
+            label={"Email"}
             type="email"
             placeholder="Email"
             name="email"
             value={formData.email}
             onChange={handleChange}
           />
-          <input
-            type="password="
+          <TitledInput
+            label={"Senha"}
+            type="password"
             placeholder="Senha"
             name="password"
             value={formData.password}
@@ -74,7 +78,7 @@ export const Login: React.FC = () => {
           <div className="containerButtons">
             <button onClick={handleLogin}>Login</button>
             <Link to={"/register-user"}>
-              <button>Cadastrar-se</button>
+              <Button label={"Cadastrar-se"} />
             </Link>
           </div>
         </div>
