@@ -1,5 +1,6 @@
 .header {
   background-color: #dede1c;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  padding-bottom: 20px;
 }
