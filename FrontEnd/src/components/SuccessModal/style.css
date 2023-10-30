@@ -39,3 +39,7 @@
   cursor: pointer;
   font-size: 16px;
 }
+
+.successModalButton:hover {
+  background-color: #2200ff;
+}

@@ -12,7 +12,7 @@ export const SuccessModal: React.FC<Props> = ({ onClose }) => {
       <div className="successModalContent">
         <h2 className="successModalTitle">Cadastro bem-sucedido!</h2>
         <p className="successModalText">Sua conta foi criada com sucesso.</p>
-        <Link to={"/"}>
+        <Link to={"/login"}>
           <button className="successModalButton" onClick={onClose}>
             Fazer Login
           </button>
