@@ -8,7 +8,7 @@ interface GenericButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button: React.FC<GenericButtonProps> = ({ label, ...rest }) => {
   return (
-    <button className="buttonGeneric" {...rest}>
+    <button className="text-3xl font-bold underline" {...rest}>
       {label}
     </button>
   );

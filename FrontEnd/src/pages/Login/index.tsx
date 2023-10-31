@@ -51,13 +51,13 @@ export const Login: React.FC = () => {
   }, []);
 
   return (
-    <div className="container">
-      <div className="content">
-        <div className="containerTitle">
+    <div className="bg-gradient-to-r from-sky-500 to-indigo-500 h-screen flex flex-col justify-center items-center">
+      <div className="bg-white w-2/5 mx-auto my-auto p-12 shadow-2xl rounded border-x-4 border-yellow-400">
+        <div className="flex flex-row justify-center rounded border-x-4 border-yellow-400 mx-2 my-1">
           <text className="title">Entrar</text>
         </div>
 
-        <div className="containerBody">
+        <div className="flex flex-col justify-center">
           <TitledInput
             label={"Email"}
             type="email"
