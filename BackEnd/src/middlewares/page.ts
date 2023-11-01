@@ -1,17 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
+import { PrismaClient } from '@prisma/client';
 
 export async function page(req: Request, res: Response, next: NextFunction) {
   try {
-    let { limit = 5, page = 1, ordering = '_id:-1' } = req.query;
-
-    const orderingSTR = ordering as string;
-
-    let [fieldOrdering, order] = orderingSTR.split(':');
+    let { limit = 5, page = 1 } = req.query;
 
     limit = parseInt(limit as string, 10);
     page = parseInt(page as string, 10);
 
-    const result = (req as any).result;
+    const result = (req as any).result as PrismaClient;
 
     console.log(result);
 
@@ -20,7 +17,7 @@ export async function page(req: Request, res: Response, next: NextFunction) {
         take: limit,
         skip: (page - 1) * limit,
         orderBy: {
-          [fieldOrdering]: order as 'asc' | 'desc',
+          name: 'desc',
         },
       });
 

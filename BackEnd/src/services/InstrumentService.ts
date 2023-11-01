@@ -17,11 +17,11 @@ export class InstrumentService {
     });
   };
 
-  getAllInstrument = () => {
-    return instrumentRepository.findMany();
+  getAllInstrument = async () => {
+    return await instrumentRepository.findMany();
   };
 
   getInstrumentFilterString = async (string: EfamilyInstrument) => {
-    return instrumentRepository.findMany({ where: { family: string } });
+    return await instrumentRepository.findMany({ where: { family: string } });
   };
 }

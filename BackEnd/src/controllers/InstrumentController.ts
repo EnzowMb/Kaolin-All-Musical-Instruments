@@ -35,7 +35,11 @@ export class InstrumentController {
     }
   };
 
-  getInstrumentFilterString = async (req: Request, res: Response) => {
+  getInstrumentFilterString = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       let { string } = req.query;
 
@@ -50,7 +54,11 @@ export class InstrumentController {
             string as EfamilyInstrument
           );
 
-        res.status(200).json(instrumentsResult);
+        (req as any).result = instrumentsResult;
+        (req as any).string = string;
+
+        next();
+        //res.status(200).json(instrumentsResult);
       }
     } catch (error) {
       return res.json(error);
