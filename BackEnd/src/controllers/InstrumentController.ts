@@ -3,7 +3,6 @@ import { InstrumentType, Validation } from '../services/Validation';
 import { Instrument } from '../model/InstrumentModel';
 import { InstrumentService } from '../services/InstrumentService';
 import { EfamilyInstrument } from '../model/EfamilyInstrument';
-import { instrumentRepository } from '../repositories/InstrumentRepository';
 
 export class InstrumentController {
   instrumentService: InstrumentService;
@@ -43,22 +42,28 @@ export class InstrumentController {
     try {
       let { string } = req.query;
 
+      let { limit = 5, page = 1 } = req.query;
+
+      limit = parseInt(limit as string, 10);
+      page = parseInt(page as string, 10);
+
       EfamilyInstrument[string as keyof typeof EfamilyInstrument];
 
-      if (!Object.keys(EfamilyInstrument).includes(string as EfamilyInstrument))
-        throw new Error('category not found');
+      if (
+        !Object.keys(EfamilyInstrument).includes(string as EfamilyInstrument)
+      ) {
+        return res.status(401).send({ message: 'Category not found' });
+      }
 
       if (string !== null) {
         const instrumentsResult =
           await this.instrumentService.getInstrumentFilterString(
-            string as EfamilyInstrument
+            string as EfamilyInstrument,
+            limit,
+            page
           );
 
-        (req as any).result = instrumentsResult;
-        (req as any).string = string;
-
-        next();
-        //res.status(200).json(instrumentsResult);
+        return res.status(200).json(instrumentsResult);
       }
     } catch (error) {
       return res.json(error);

@@ -1,5 +1,4 @@
 import express from 'express';
-import { exampleRoute } from './routes/ExampleRoute';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJson from './swagger.json';
 import { instrumentRoute } from './routes/InstrumentRoute';
@@ -22,7 +21,6 @@ app.use(cors({ origin: '*' }));
 
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJson));
 
-app.use('/example', exampleRoute);
 app.use('/instrument', instrumentRoute);
 app.use('/user', userRoute);
 app.use('/login', loginRoute);

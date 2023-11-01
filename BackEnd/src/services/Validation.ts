@@ -1,8 +1,6 @@
 import { z } from 'zod';
 import { EfamilyInstrument } from '../model/EfamilyInstrument';
 
-export type ExampleType = z.infer<typeof Validation.ExampleSchema>;
-
 export type InstrumentType = z.infer<typeof Validation.InstrumentSchema>;
 
 export type UserType = z.infer<typeof Validation.UserSchema>;
@@ -10,10 +8,6 @@ export type UserType = z.infer<typeof Validation.UserSchema>;
 export type LoginType = z.infer<typeof Validation.LoginSchema>;
 
 export class Validation {
-  static ExampleSchema = z.object({
-    name: z.string().min(3, { message: 'minimum 3 digits' }),
-  });
-
   static UserSchema = z.object({
     name: z
       .string()

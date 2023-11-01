@@ -21,7 +21,18 @@ export class InstrumentService {
     return await instrumentRepository.findMany();
   };
 
-  getInstrumentFilterString = async (string: EfamilyInstrument) => {
-    return await instrumentRepository.findMany({ where: { family: string } });
+  getInstrumentFilterString = async (
+    string: EfamilyInstrument,
+    limit: number,
+    page: number
+  ) => {
+    return await instrumentRepository.findMany({
+      where: { family: string },
+      take: limit,
+      skip: (page - 1) * limit,
+      orderBy: {
+        name: 'desc',
+      },
+    });
   };
 }
