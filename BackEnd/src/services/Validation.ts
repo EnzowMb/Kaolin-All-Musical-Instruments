@@ -31,6 +31,10 @@ export class Validation {
     email: z
       .string({ required_error: 'Necessita de email' })
       .email({ message: 'Email invalido' }),
-    password: z.string({ required_error: 'Necessita de password ' }),
+    password: z
+      .string({ required_error: 'Necessita de senha' })
+      .refine((value) => value.trim() !== '', {
+        message: 'A senha não pode ser vazia',
+      }),
   });
 }
