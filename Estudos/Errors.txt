@@ -1,0 +1,8 @@
+{
+    "name": "PrismaClientKnownRequestError",
+    "code": "P2023",
+    "clientVersion": "5.5.0",
+    "meta": {
+        "message": "Malformed ObjectID: provided hex string representation must be exactly 12 bytes, instead got: \"1234\", length 4."
+    }
+}
