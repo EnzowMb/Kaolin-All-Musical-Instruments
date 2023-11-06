@@ -12,6 +12,7 @@ export class AuthService {
       },
     });
 
+    //Retornar erro
     if (!user) {
       return null;
     }
@@ -26,6 +27,7 @@ export class AuthService {
       {
         id: user.id,
         email: user.email,
+        name: user.name,
       },
       jsonSecret.secret,
       {
@@ -33,6 +35,6 @@ export class AuthService {
       }
     );
 
-    return { acessToken };
+    return { acessToken: acessToken, user: user };
   };
 }

@@ -47,6 +47,9 @@ export class InstrumentController {
       limit = parseInt(limit as string, 10);
       page = parseInt(page as string, 10);
 
+      console.log((req as any).usuarioEmail);
+      console.log((req as any).usuarioName);
+
       EfamilyInstrument[string as keyof typeof EfamilyInstrument];
 
       if (
