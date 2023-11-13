@@ -7,7 +7,7 @@ const instrumentController = new InstrumentController();
 
 router
   .get('/', instrumentController.getAllInstrument)
-  .get('/family', auth, instrumentController.getInstrumentFilterString)
+  .get('/family', instrumentController.getInstrumentFilterString)
   .post('/create', auth, instrumentController.createInstrument);
 
 export const instrumentRoute = router;
