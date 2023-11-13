@@ -6,7 +6,7 @@ const router = Router();
 const userController = new UserController();
 
 router
-  .get('/', userController.getAllUsers)
+  .get('/', auth, userController.getAllUsers)
   .get('/:id', auth, userController.getUser)
   .post('/create', userController.createUser);
 
