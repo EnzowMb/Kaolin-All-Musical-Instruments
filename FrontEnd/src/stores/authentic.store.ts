@@ -1,14 +1,13 @@
 import { action, makeObservable, observable } from "mobx";
 
 interface IUsuario {
-  name: string;
   email: string;
   token: string;
 }
 
 class AuthenticStore {
   isAuthentic = false;
-  user: IUsuario = { name: "", email: "", token: "" };
+  user: IUsuario = { email: "", token: "" };
 
   constructor() {
     makeObservable(this, {
@@ -19,14 +18,14 @@ class AuthenticStore {
     });
   }
 
-  login({ email, token, name }: IUsuario) {
+  login({ email, token }: IUsuario) {
     this.isAuthentic = true;
-    this.user = { email, token, name };
+    this.user = { email, token };
   }
 
   logout() {
     this.isAuthentic = false;
-    this.user = { name: "", email: "", token: "" };
+    this.user = { email: "", token: "" };
   }
 }
 

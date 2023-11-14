@@ -7,6 +7,7 @@ import axios from "axios";
 import { useUserState } from "../../context/UserStore";
 import styled from "styled-components";
 import logo from "../../Img/Logo.png";
+import { authenticStore } from "../../stores/authentic.store";
 
 const Image = styled.img`
   padding: 2em 0;
@@ -54,6 +55,8 @@ export const Login: React.FC = () => {
     password: "",
   });
 
+  const [response, setResponse] = useState("");
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -70,12 +73,10 @@ export const Login: React.FC = () => {
 
     try {
       const user = await axios.post("http://localhost:8000/login", formData);
-      let userLogin = useUserState.getState().user;
-      userLogin = {
-        name: user.data.name,
-      };
-      useUserState.setState({ user: userLogin });
       alert("Login bem-sucedido!");
+      const convertedResponse = await user.data.json();
+      setResponse(convertedResponse.token);
+      authenticStore.login({ email: formData.email, token: response });
     } catch (error) {
       alert("Email ou senha incorretos. Tente novamente.");
     }
