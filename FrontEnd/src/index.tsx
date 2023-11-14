@@ -27,10 +27,10 @@ root.render(
           <Route path="/cordas" element={<String />} />
           <Route path="/percussao" element={<Percussion />} />
           <Route path="/metais" element={<Brass />} />
-          <Route path="/register-user" element={<RegisterUser />} />
         </Route>
         <Route path="/" element={<BasicFormPage />}>
           <Route path="/login" element={<Login />} />
+          <Route path="/register-user" element={<RegisterUser />} />
         </Route>
       </Routes>
     </BrowserRouter>

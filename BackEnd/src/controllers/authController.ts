@@ -23,6 +23,7 @@ export class AuthController {
         return res.status(200).json({
           acesstoken: login.acessToken,
           name: login.user.name,
+          email: login.user.email,
         });
       } else {
         return res.status(400).send({ message: 'Invalid User or Password' });

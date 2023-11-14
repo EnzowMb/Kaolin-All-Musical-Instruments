@@ -5,6 +5,48 @@ import { TitledInput } from "../../components/TitledInput";
 import { Button } from "../../components/Button";
 import axios from "axios";
 import { useUserState } from "../../context/UserStore";
+import styled from "styled-components";
+import logo from "../../Img/Logo.png";
+
+const Image = styled.img`
+  padding: 2em 0;
+  width: 10em;
+`;
+
+const Title = styled.h2`
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: var(--cinza);
+`;
+
+const Form = styled.form`
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const CustomizedButton = styled(Button)`
+  width: 50%;
+`;
+
+const Paragraph = styled.p`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: blue;
+`;
+
+const RegisterParagraph = styled(Paragraph)`
+  color: gray;
+`;
+
+const CustomizedLink = styled(Link)`
+  color: blue;
+  font-weight: 700;
+  text-decoration: none;
+`;
 
 export const Login: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -40,40 +82,33 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-sky-500 to-indigo-500 h-screen flex flex-col justify-center items-center">
-      <div className="bg-white w-2/5 mx-auto my-auto p-12 shadow-2xl rounded border-x-4 border-yellow-400">
-        <div className="flex flex-row justify-center rounded border-x-4 border-yellow-400 mx-2 my-1">
-          <text className="text-4xl lg: text-6xl font-bold text-center">
-            Entrar
-          </text>
-        </div>
-
-        <div className="flex flex-col justify-center">
-          <TitledInput
-            label={"Email"}
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <TitledInput
-            label={"Senha"}
-            type="password"
-            placeholder="Senha"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-
-          <div className="containerButtons">
-            <button onClick={handleLogin}>Login</button>
-            <Link to={"/register-user"}>
-              <Button label={"Cadastrar-se"} />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
+    <>
+      <Image src={logo} alt="Logo Kaolin" />
+      <Title>Faça login em sua conta</Title>
+      <Form>
+        <TitledInput
+          label={"Email"}
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <TitledInput
+          label={"Senha"}
+          type="password"
+          placeholder="Senha"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+        <CustomizedButton label="Login" onClick={handleLogin} />
+      </Form>
+      <Paragraph>Esqueceu sua senha?</Paragraph>
+      <RegisterParagraph>
+        Ainda não tem conta?
+        <CustomizedLink to="/register-user">Faça seu cadastro!</CustomizedLink>
+      </RegisterParagraph>
+    </>
   );
 };

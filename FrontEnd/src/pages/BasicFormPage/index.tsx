@@ -14,7 +14,6 @@ const MainContainer = styled.div`
 
 const Container = styled.div`
   background-color: white;
-  background: rgba(0, 0, 0, 0.5);
   width: 50vw;
   height: 100%;
   display: flex;
