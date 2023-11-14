@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 import { TitledInput } from "../../components/TitledInput";
 import { Button } from "../../components/Button";
 import axios from "axios";
-import { useUserState } from "../../context/UserStore";
 import styled from "styled-components";
 import logo from "../../Img/Logo.png";
 import { authenticStore } from "../../stores/authentic.store";
@@ -56,6 +55,7 @@ export const Login: React.FC = () => {
   });
 
   const [response, setResponse] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -65,28 +65,34 @@ export const Login: React.FC = () => {
     });
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     if (formData.email === "" || formData.password === "") {
       alert("Por favor, preencha todos os campos antes de fazer o login.");
       return;
     }
-
-    try {
-      const user = await axios.post("http://localhost:8000/login", formData);
-      alert("Login bem-sucedido!");
-      const convertedResponse = await user.data.json();
-      setResponse(convertedResponse.token);
-      authenticStore.login({ email: formData.email, token: response });
-    } catch (error) {
-      alert("Email ou senha incorretos. Tente novamente.");
-    }
+    await axios
+      .post("http://localhost:8000/login", formData)
+      .then((response) => {
+        console.log(response);
+        alert("Login bem-sucedido!");
+        authenticStore.login({
+          email: formData.email,
+          token: response.data.acessToken,
+        });
+        response && navigate("/dashboard");
+      })
+      .catch((error) => {
+        alert("Email ou senha incorretos. Tente novamente.");
+      });
   };
 
   return (
     <>
       <Image src={logo} alt="Logo Kaolin" />
       <Title>Faça login em sua conta</Title>
-      <Form>
+      <Form onSubmit={handleLogin}>
         <TitledInput
           label={"Email"}
           type="email"
@@ -103,7 +109,7 @@ export const Login: React.FC = () => {
           value={formData.password}
           onChange={handleChange}
         />
-        <CustomizedButton label="Login" onClick={handleLogin} />
+        <CustomizedButton type="submit" label="Login" />
       </Form>
       <Paragraph>Esqueceu sua senha?</Paragraph>
       <RegisterParagraph>
