@@ -25,11 +25,11 @@ root.render(
       <Routes>
         <Route path="/" element={<BasePage />}>
           <Route index element={<Home />} />
+          <Route path="/madeiras" element={<WoodWind />} />
+          <Route path="/cordas" element={<String />} />
+          <Route path="/percussao" element={<Percussion />} />
+          <Route path="/metais" element={<Brass />} />
           <Route element={<PrivateRoute />}>
-            <Route path="/madeiras" element={<WoodWind />} />
-            <Route path="/cordas" element={<String />} />
-            <Route path="/percussao" element={<Percussion />} />
-            <Route path="/metais" element={<Brass />} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
         </Route>
