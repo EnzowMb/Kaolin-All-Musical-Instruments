@@ -1,9 +1,10 @@
 :root {
-  --khaki: #f0e68c;
-  --honeydew: #f0fff0;
-  --palegoldenrod: #eee8aa;
-  --lavenderblush: #fff0f5;
-  --thistle: #d8bfd8;
+  --SaddleBrown: #8b4513;
+  --Khaki: #f0e68c;
+  --HoneyDew: #f0fff0;
+  --PaleGoldenrod: #eee8aa;
+  --MistyRose: #ffe4e1;
+  --Thistle: #d8bfd8;
 }
 
 body {

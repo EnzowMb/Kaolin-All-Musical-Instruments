@@ -8,10 +8,10 @@ interface GenericButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Style = styled.button`
-  background-color: var(--thistle);
+  background-color: var(--PaleGoldenrod);
   border-radius: 8px;
   padding: 12px 16px;
-  color: var(--lavenderblush);
+  color: black;
   border: none;
   margin-top: 1em;
   font-weight: 700;
@@ -19,7 +19,7 @@ const Style = styled.button`
   cursor: pointer;
   transition: background-color 0.3s;
   &:hover {
-    background-color: #0056b3;
+    background-color: var(--MistyRose);
   }
 `;
 
