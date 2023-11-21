@@ -1,6 +1,8 @@
 import { Modal, Box } from "@mui/material";
 import { Title } from "../../../components/Title";
 import styled from "styled-components";
+import { TitledInput } from "../../../components/TitledInput";
+import { useState } from "react";
 
 const CustomizedBox = styled(Box)`
   position: fixed;
@@ -23,15 +25,36 @@ export default function ModalCadastro({
   open: boolean;
   handleClose: () => void;
 }) {
+  const [formData, setFormData] = useState({
+    name: "",
+    family: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   return (
     <Modal
       open={open}
       onClose={handleClose}
-      aria-labelledby="Modal de cadastro do especialista"
-      aria-describedby="Nesse modal terá os dados de cadastro do especialista"
+      aria-labelledby="Modal de cadastro de Instrumento"
+      aria-describedby="Nesse modal terá os dados de cadastro do instrumento"
     >
       <CustomizedBox>
-        <Title>Cadastre o especialista inserindo os dados abaixo:</Title>
+        <Title>Cadastre o instrumento inserindo os dados abaixo:</Title>
+        <TitledInput
+          label={"Nome"}
+          type="text"
+          placeholder="Insira o nome do Instrumento"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
       </CustomizedBox>
     </Modal>
   );
