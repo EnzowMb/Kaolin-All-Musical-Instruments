@@ -8,14 +8,19 @@ interface GenericButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Style = styled.button`
-  background-color: blue;
+  background-color: var(--thistle);
   border-radius: 8px;
   padding: 12px 16px;
-  color: white;
+  color: var(--lavenderblush);
   border: none;
   margin-top: 1em;
   font-weight: 700;
   line-height: 19px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: #0056b3;
+  }
 `;
 
 export const Button: React.FC<GenericButtonProps> = ({ label, ...rest }) => {

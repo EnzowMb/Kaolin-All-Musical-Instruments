@@ -1,3 +1,11 @@
+:root {
+  --khaki: #f0e68c;
+  --honeydew: #f0fff0;
+  --palegoldenrod: #eee8aa;
+  --lavenderblush: #fff0f5;
+  --thistle: #d8bfd8;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -11,15 +19,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-li {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
