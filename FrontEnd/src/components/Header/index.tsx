@@ -8,7 +8,6 @@ const HeaderContainer = styled.header`
   background-color: var(--Khaki);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 2em 4em;
 `;
 
@@ -22,7 +21,7 @@ const LogoHeader = styled.img`
 const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-grow: 0.1;
 `;
 

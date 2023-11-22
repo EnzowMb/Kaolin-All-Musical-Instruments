@@ -13,7 +13,6 @@ const Style = styled.button`
   padding: 12px 16px;
   color: black;
   border: none;
-  margin-top: 1em;
   font-weight: 700;
   line-height: 19px;
   cursor: pointer;

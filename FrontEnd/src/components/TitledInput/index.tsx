@@ -1,5 +1,4 @@
 import React, { InputHTMLAttributes } from "react";
-import "./styles.css";
 import styled from "styled-components";
 
 interface GenericInputProps extends InputHTMLAttributes<HTMLInputElement> {
