@@ -1,5 +1,4 @@
 import logo from "./assets/Logo.png";
-import userLogo from "../../Img/User-Logo.png";
 import { OpcaoHeader } from "../OptionsHeader";
 import { Link } from "react-router-dom";
 import { UserHeader } from "../UserHeader";
@@ -27,15 +26,6 @@ const Container = styled.div`
   flex-grow: 0.1;
 `;
 
-const UserLogo = styled.img`
-  width: 50%;
-  transition: transform 0.3s;
-  &:hover {
-    transform: scale(1.05);
-    /* content: url("../../Img/User-Logo-gif.gif"); */
-  }
-`;
-
 const Header = () => {
   return (
     <HeaderContainer>
@@ -45,9 +35,6 @@ const Header = () => {
         </Link>
         <OpcaoHeader />
         <UserHeader />
-        <Link to="/dashboard">
-          <UserLogo src={userLogo} alt="USER-LOGO" />
-        </Link>
       </Container>
     </HeaderContainer>
   );
