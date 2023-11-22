@@ -28,12 +28,13 @@ export const UserHeader = () => {
   const handleLogout = () => {
     authenticStore.logout();
   };
+  const { user } = authenticStore;
 
   return (
     <div>
       {authenticStore.isAuthentic ? (
         <>
-          Bem vindo!
+          <p>Bem vindo! {user.email}</p>
           <StyledLink href="/" onClick={handleLogout}>
             Sair
           </StyledLink>
