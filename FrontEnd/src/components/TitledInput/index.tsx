@@ -26,7 +26,7 @@ const Label = styled.label`
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-  color: var(--azul-escuro);
+  color: black;
 `;
 
 export const TitledInput: React.FC<GenericInputProps> = ({

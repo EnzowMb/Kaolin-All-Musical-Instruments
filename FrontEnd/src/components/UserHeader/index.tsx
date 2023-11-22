@@ -1,5 +1,3 @@
-import "./UserHeader.css";
-import UserLogo from "../../Img/User-Logo.png";
 import { authenticStore } from "../../stores/authentic.store";
 import styled from "styled-components";
 
@@ -15,11 +13,15 @@ const StyledLinkLogout = styled(StyledLink)`
 `;
 
 const StyledButton = styled.a`
-  background-color: blue;
+  background-color: var(--MistyRose);
   border-radius: 8px;
   padding: 12px 16px;
-  color: var(--branco);
+  color: black;
   text-decoration: none;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: var(--Thistle);
+  }
 `;
 
 export const UserHeader = () => {
@@ -28,10 +30,7 @@ export const UserHeader = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center">
-      <div className="gif-container">
-        <img className="userLogo" src={UserLogo} alt="USER-LOGO" />
-      </div>
+    <div>
       {authenticStore.isAuthentic ? (
         <>
           Bem vindo!

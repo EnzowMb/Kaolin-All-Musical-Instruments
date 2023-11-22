@@ -75,11 +75,10 @@ export const Login: React.FC = () => {
     await axios
       .post("http://localhost:8000/login", formData)
       .then((response) => {
-        console.log(response);
         alert("Login bem-sucedido!");
         authenticStore.login({
           email: formData.email,
-          token: response.data.acessToken,
+          token: response.data.acesstoken,
         });
         response && navigate("/dashboard");
       })
