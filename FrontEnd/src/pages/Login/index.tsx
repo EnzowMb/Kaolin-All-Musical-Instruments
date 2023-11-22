@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./style.css";
 import { TitledInput } from "../../components/TitledInput";
 import { Button } from "../../components/Button";
 import axios from "axios";
@@ -113,7 +112,7 @@ export const Login: React.FC = () => {
       <Paragraph>Esqueceu sua senha?</Paragraph>
       <RegisterParagraph>
         Ainda não tem conta?
-        <CustomizedLink to="/register-user">Faça seu cadastro!</CustomizedLink>
+        <CustomizedLink to="/register-user"> Faça seu cadastro!</CustomizedLink>
       </RegisterParagraph>
     </>
   );

@@ -14,7 +14,6 @@ import { useState } from "react";
 import { Button } from "../../../components/Button";
 import { authenticStore } from "../../../stores/authentic.store";
 import { usePost } from "../../../services/usePost";
-import { SuccessModal } from "../../../components/SuccessModal";
 
 const CustomizedBox = styled(Box)`
   position: fixed;
@@ -55,7 +54,7 @@ const CustomizedButton = styled(Button)`
   margin: 1em auto;
 `;
 
-export default function ModalCadastro({
+export default function RegisterInstrumentModal({
   open,
   handleClose,
 }: {

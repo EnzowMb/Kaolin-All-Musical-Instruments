@@ -56,6 +56,12 @@ export const RegisterUser: React.FC = () => {
 
   const handleStep = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (formData.name === "") {
+      alert("Por favor, insira o nome do usuario.");
+      return;
+    }
+
     setActiveStage(activeStage + 1);
   };
 
@@ -126,6 +132,7 @@ export const RegisterUser: React.FC = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
+              required
             />
             <CustomButton type="submit" label="Avançar" />
           </Form>
@@ -145,6 +152,7 @@ export const RegisterUser: React.FC = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
+                  required
                 />
                 <TitledInput
                   label={"Senha"}
@@ -153,6 +161,7 @@ export const RegisterUser: React.FC = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
+                  required
                 />
                 <CustomButton type="submit" label="Cadastrar-se"></CustomButton>
                 <Link to={"/"}>

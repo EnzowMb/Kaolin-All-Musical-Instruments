@@ -3,7 +3,8 @@ import { Container } from "../../components/Container";
 import { Title } from "../../components/Title";
 import { Button } from "../../components/Button";
 import { useState } from "react";
-import RegisterModal from "./Modal";
+import RegisterModal from "./RegisterInstrumentModal";
+import EditModal from "./EditUserModal";
 
 const UserContainer = styled(Container)`
   display: flex;
@@ -21,25 +22,41 @@ const CustomizedButton = styled(Button)`
 `;
 
 export const Dashboard = () => {
-  const [open, setOpen] = useState(false);
+  const [openModalRegister, setOpenModalRegister] = useState(false);
+  const [openModalEdit, setOpenModalEdit] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleOpenRegister = () => {
+    setOpenModalRegister(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseRegister = () => {
+    setOpenModalRegister(false);
+  };
+
+  const handleOpenEdit = () => {
+    setOpenModalEdit(true);
+  };
+
+  const handleCloseEdit = () => {
+    setOpenModalEdit(false);
   };
 
   return (
     <UserContainer>
       <Title>Perfil do Usuario!</Title>
-      <CustomizedButton label="Editar Usuario" />
       <CustomizedButton
-        onClick={() => handleOpen()}
+        onClick={() => handleOpenEdit()}
+        label="Editar Usuario"
+      />
+      <CustomizedButton
+        onClick={() => handleOpenRegister()}
         label="Adicionar Instrumento"
       />
-      <RegisterModal open={open} handleClose={handleClose} />
+      <RegisterModal
+        open={openModalRegister}
+        handleClose={handleCloseRegister}
+      />
+      <EditModal open={openModalEdit} handleClose={handleCloseEdit} />
     </UserContainer>
   );
 };
