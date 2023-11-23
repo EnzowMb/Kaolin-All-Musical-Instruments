@@ -61,7 +61,6 @@ export class UserService {
 
     const token = sign(tokenData, jsonSecret.secret, tokenOptions);
 
-    console.log('opa service');
     return token;
   };
 }

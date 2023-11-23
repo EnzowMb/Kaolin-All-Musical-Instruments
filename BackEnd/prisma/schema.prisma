@@ -14,11 +14,14 @@ model Instrument {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   name   String
   family String
+  user User? @relation(fields: [userId], references: [id])
+  userId String?
 }
 
 model User {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   name   String
   email  String @unique
+  favoriteInstruments Instrument[]
   password String @unique
 }
