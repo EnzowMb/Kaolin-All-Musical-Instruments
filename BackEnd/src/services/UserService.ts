@@ -63,4 +63,20 @@ export class UserService {
 
     return token;
   };
+
+  updateUser = async (user: User, userId: string) => {
+    return userRepository.update({
+      where: { id: userId },
+      data: {
+        name: user.getName(),
+        email: user.getEmail(),
+      },
+      select: {
+        id: false,
+        name: true,
+        email: true,
+        password: false,
+      },
+    });
+  };
 }
