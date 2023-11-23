@@ -65,11 +65,13 @@ export class UserService {
   };
 
   updateUser = async (user: User, userId: string) => {
+    const passwordHash = await hash(user.getPassword(), 8); //8 -> saltRounds
     return userRepository.update({
       where: { id: userId },
       data: {
         name: user.getName(),
         email: user.getEmail(),
+        password: passwordHash,
       },
       select: {
         id: false,

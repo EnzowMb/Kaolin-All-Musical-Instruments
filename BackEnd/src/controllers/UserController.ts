@@ -44,4 +44,21 @@ export class UserController {
       return res.json(error);
     }
   };
+
+  updateUser = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const { name, email, password } = req.body as UserType;
+      Validation.UserSchema.parse({
+        name: name,
+        email: email,
+        password: password,
+      });
+      const userModel = new User(name, email, password);
+      const user = await this.userService.updateUser(userModel, id);
+      return res.status(201).json(user);
+    } catch (error: any) {
+      return res.json(error);
+    }
+  };
 }
