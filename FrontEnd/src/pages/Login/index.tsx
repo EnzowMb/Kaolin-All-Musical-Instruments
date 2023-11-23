@@ -78,6 +78,8 @@ export const Login: React.FC = () => {
         authenticStore.login({
           email: formData.email,
           token: response.data.acesstoken,
+          name: response.data.name,
+          id: response.data.id,
         });
         response && navigate("/dashboard");
       })

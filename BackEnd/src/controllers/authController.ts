@@ -22,6 +22,7 @@ export class AuthController {
       if (login) {
         return res.status(200).json({
           acesstoken: login.acessToken,
+          id: login.user.id,
           name: login.user.name,
           email: login.user.email,
         });

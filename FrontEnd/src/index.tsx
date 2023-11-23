@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import Header from "./components/Header";
 import { Home } from "./pages/Home";
 import { WoodWind } from "./pages/WoodWind";
 import { String } from "./pages/String";
