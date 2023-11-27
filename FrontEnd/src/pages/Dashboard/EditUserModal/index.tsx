@@ -102,6 +102,10 @@ export default function EditUserModal({
             value={formData.name}
             onChange={handleChange}
             disabled={!isInputEnabled}
+            style={{
+              border: isInputEnabled ? "none" : "2px solid var(--SaddleBrown)",
+              color: isInputEnabled ? "black" : "gray",
+            }}
             required
           />
           <TitledInput
@@ -112,6 +116,10 @@ export default function EditUserModal({
             value={formData.email}
             onChange={handleChange}
             disabled={!isInputEnabled}
+            style={{
+              border: isInputEnabled ? "none" : "2px solid var(--SaddleBrown)",
+              color: isInputEnabled ? "black" : "gray",
+            }}
             required
           />
           <TitledInput
@@ -122,6 +130,10 @@ export default function EditUserModal({
             value={formData.password}
             onChange={handleChange}
             disabled={!isInputEnabled}
+            style={{
+              border: isInputEnabled ? "none" : "2px solid var(--SaddleBrown)",
+              color: isInputEnabled ? "black" : "gray",
+            }}
             required
           />
           {isInputEnabled && (

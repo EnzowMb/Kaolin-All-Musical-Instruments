@@ -54,6 +54,15 @@ const CustomizedButton = styled(Button)`
   margin: 1em auto;
 `;
 
+const Label = styled.label`
+  display: block;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: black;
+  margin-bottom: 1em;
+`;
+
 export default function RegisterInstrumentModal({
   open,
   handleClose,
@@ -125,6 +134,7 @@ export default function RegisterInstrumentModal({
             value={formData.name}
             onChange={handleChange}
           />
+          <Label>Familia</Label>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Familia</InputLabel>
             <StyleSelect
