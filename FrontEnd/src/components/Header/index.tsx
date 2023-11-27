@@ -1,5 +1,5 @@
 import logo from "./assets/Logo.png";
-import userLogo from "../../Img/User-Logo.png";
+import userLogo from "./assets/User-Logo.png";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { authenticStore } from "../../stores/authentic.store";
@@ -10,12 +10,12 @@ const HeaderContainer = styled.header`
   background-color: var(--Khaki);
   display: flex;
   align-items: center;
-  padding: 2em 4em;
+  justify-content: space-between;
+  padding: 2em 2em;
 `;
 
 const LogoHeader = styled.img`
-  margin-right: 1em;
-  width: 50%;
+  width: 200px;
   border-radius: 2em;
   border: 2px solid black;
 `;
@@ -23,20 +23,18 @@ const LogoHeader = styled.img`
 const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   flex-grow: 0.1;
 `;
 
 const Options = styled.ul`
   display: flex;
+  justify-content: space-around;
   flex-grow: 1;
-  justify-content: center;
+  list-style-type: none;
 `;
 
 const Option = styled.li`
   font-size: 1.5em;
-  display: flex;
-  justify-content: center;
   align-items: center;
   text-align: center;
   height: 100%;
@@ -47,7 +45,14 @@ const Option = styled.li`
 
 const StyledLink = styled.a`
   font-weight: 400;
-  color: blue;
+  color: var(--HoneyDew);
+  text-decoration: none;
+  padding: 0.5em 1.5em;
+  border-radius: 1em;
+  background-color: var(--SaddleBrown);
+  &:hover {
+    color: var(--MistyRose);
+  }
 `;
 
 const StyledButton = styled.a`
@@ -64,12 +69,28 @@ const StyledButton = styled.a`
 `;
 
 const UserLogo = styled.img`
-  width: 50%;
+  width: 220px;
   transition: transform 0.3s;
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.025);
     /* content: url("../../Img/User-Logo-gif.gif"); */
   }
+`;
+
+const UserContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+`;
+
+const UserOptions = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 1em 2em;
+  border-radius: 2em;
+  font-size: 1em;
 `;
 
 const Header = () => {
@@ -80,38 +101,41 @@ const Header = () => {
 
   return (
     <HeaderContainer>
+      <Link to="/">
+        <LogoHeader src={logo} alt="logo Kaolin" />
+      </Link>
       <Container>
-        <Link to="/">
-          <LogoHeader src={logo} alt="logo Kaolin" />
-        </Link>
         <Options>
           {textOptions.map((text) => (
-            <Link to={`${text.toLowerCase().split(" ").join("")}`}>
+            <Link
+              to={`${text.toLowerCase().split(" ").join("")}`}
+              style={{ textDecoration: "none" }}
+            >
               <Option>
                 <p>{text}</p>
               </Option>
             </Link>
           ))}
         </Options>
-        <div>
-          <Link to="/dashboard">
-            <UserLogo src={userLogo} alt="USER-LOGO" />
-          </Link>
-          {authenticStore.isAuthentic ? (
-            <div>
-              <p>Bem vindo! {user.email}</p>
-              <StyledLink href="/" onClick={handleLogout}>
-                Sair
-              </StyledLink>
-            </div>
-          ) : (
-            <div>
-              <StyledButton href="/login">Entrar</StyledButton>
-              <StyledButton href="/register-user">Cadastre-se</StyledButton>
-            </div>
-          )}
-        </div>
       </Container>
+      <UserContainer>
+        <a href="/dashboard">
+          <UserLogo src={userLogo} alt="USER-LOGO" />
+        </a>
+        {authenticStore.isAuthentic ? (
+          <UserOptions>
+            <p>Bem vindo {user.name}!</p>
+            <StyledLink href="/" onClick={handleLogout}>
+              Sair
+            </StyledLink>
+          </UserOptions>
+        ) : (
+          <div>
+            <StyledButton href="/login">Entrar</StyledButton>
+            <StyledButton href="/register-user">Cadastre-se</StyledButton>
+          </div>
+        )}
+      </UserContainer>
     </HeaderContainer>
   );
 };
