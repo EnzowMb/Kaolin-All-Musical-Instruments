@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./style.css";
 import { SuccessModal } from "../../components/SuccessModal";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -19,7 +18,7 @@ interface CustomizedProps {
 }
 
 const CustomizedStep = styled.div<CustomizedProps>`
-  background-color: ${({ color }) => color};
+  background-color: ${({ cor }) => cor};
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -121,6 +120,7 @@ export const RegisterUser: React.FC = () => {
           />
         </Step>
       </Stepper>
+
       {activeStage === 0 ? (
         <>
           <Title>Primeiro, alguns dados básicos:</Title>
@@ -163,7 +163,7 @@ export const RegisterUser: React.FC = () => {
                   onChange={handleChange}
                   required
                 />
-                <CustomButton type="submit" label="Cadastrar-se"></CustomButton>
+                <CustomButton type="submit" label="Cadastrar-se" />
                 <Link to={"/"}>
                   <Button label={"Cancelar"} />
                 </Link>
