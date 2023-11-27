@@ -7,6 +7,7 @@ import { Button } from "../../components/Button";
 import logo from "../../Img/Logo.png";
 import styled from "styled-components";
 import { Step, StepLabel, Stepper } from "@mui/material";
+import { usePost } from "../../services/usePost";
 
 const Image = styled.img`
   padding: 2em 0;
@@ -14,11 +15,11 @@ const Image = styled.img`
 `;
 
 interface CustomizedProps {
-  cor: string;
+  color: string;
 }
 
 const CustomizedStep = styled.div<CustomizedProps>`
-  background-color: ${({ cor }) => cor};
+  background-color: ${({ color }) => color};
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -44,6 +45,8 @@ const CustomButton = styled(Button)`
 
 export const RegisterUser: React.FC = () => {
   const [activeStage, setActiveStage] = useState(0);
+
+  const { registerData, sucess, error } = usePost();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -108,14 +111,18 @@ export const RegisterUser: React.FC = () => {
         <Step>
           <StepLabel
             StepIconComponent={(props) => (
-              <CustomizedStep cor={props.active ? "lightblue" : "lightgray"} />
+              <CustomizedStep
+                color={props.active ? "lightblue" : "lightgray"}
+              />
             )}
           />
         </Step>
         <Step>
           <StepLabel
             StepIconComponent={(props) => (
-              <CustomizedStep cor={props.active ? "lightblue" : "lightgray"} />
+              <CustomizedStep
+                color={props.active ? "lightblue" : "lightgray"}
+              />
             )}
           />
         </Step>
@@ -165,7 +172,7 @@ export const RegisterUser: React.FC = () => {
                 />
                 <CustomButton type="submit" label="Cadastrar-se" />
                 <Link to={"/"}>
-                  <Button label={"Cancelar"} />
+                  <CustomButton type="button" label={"Cancelar"} />
                 </Link>
               </>
             )}

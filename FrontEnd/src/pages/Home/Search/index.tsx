@@ -7,7 +7,7 @@ const Input = styled.input`
   margin: 1em;
   background-image: url(${search});
   background-repeat: no-repeat;
-  background-color: #f0f0f0;
+  background-color: var(--gray);
   background-position: 10px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
   border-radius: 8px;

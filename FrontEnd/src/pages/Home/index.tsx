@@ -6,6 +6,7 @@ import { InstrumentCard } from "../../components/InstrumentCard";
 import { Banner } from "./Banner";
 import styled from "styled-components";
 import { Seacrh } from "./Search";
+import { TypeInstrument } from "./TypeInstrument";
 
 const Container = styled.section`
   display: flex;
@@ -31,6 +32,7 @@ export function Home() {
       <div className="elements">
         <Container>
           <Seacrh />
+          <TypeInstrument />
         </Container>
         {instruments.map((instrument) => (
           <InstrumentCard name={instrument.name} family={instrument.family} />
