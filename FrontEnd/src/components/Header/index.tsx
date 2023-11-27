@@ -119,9 +119,9 @@ const Header = () => {
         </Options>
       </Container>
       <UserContainer>
-        <a href="/dashboard">
+        <Link to="/dashboard">
           <UserLogo src={userLogo} alt="USER-LOGO" />
-        </a>
+        </Link>
         {authenticStore.isAuthentic ? (
           <UserOptions>
             <p>Bem vindo {user.name}!</p>
