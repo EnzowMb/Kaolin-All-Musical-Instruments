@@ -80,6 +80,11 @@ export const RegisterUser: React.FC = () => {
     return emailRegex.test(email);
   };
 
+  const isPasswordValid = (password: string) => {
+    const passwordRegex = /^[A-Z0-9._%+-]{4,}$/;
+    return passwordRegex.test(password);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -90,6 +95,11 @@ export const RegisterUser: React.FC = () => {
 
     if (!isEmailValid(formData.email)) {
       alert("Por favor, insira um endereço de e-mail válido.");
+      return;
+    }
+
+    if (!isPasswordValid(formData.password)) {
+      alert("Por favor, insira uma senha válida.");
       return;
     }
 
