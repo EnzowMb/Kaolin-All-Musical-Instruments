@@ -3,6 +3,7 @@ import { User } from '../model/UserModel';
 import { jsonSecret } from '../jsonSecret';
 import { userRepository } from '../repositories/UserRepository';
 import { sign } from 'jsonwebtoken';
+import { Instrument } from '../model/InstrumentModel';
 
 export class UserService {
   findByEmailAndPassword = (email: string, password: string) => {
@@ -83,4 +84,9 @@ export class UserService {
       },
     });
   };
+
+  updateFavoriteInstruments = async (
+    Instrument: Instrument,
+    userId: string
+  ) => {};
 }
