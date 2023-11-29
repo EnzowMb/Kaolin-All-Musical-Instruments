@@ -3,6 +3,7 @@ import woodwind from "./assets/WoodWind.png";
 import brass from "./assets/Brass.png";
 import percussion from "./assets/Percussion.png";
 import string from "./assets/String.png";
+import { Link } from "react-router-dom";
 
 const Container = styled.section`
   display: flex;
@@ -36,36 +37,32 @@ const Img = styled.img`
   width: 50%;
 `;
 
-const Link = styled.a`
-  text-decoration: none;
-`;
-
 export const TypeInstrument = () => {
   return (
     <Container>
       <Section>
-        <Link href="/cordas">
+        <Link to={"/cordas"} style={{ textDecoration: "none" }}>
           <Img src={string} alt="String" />
           <Text>Cordas</Text>
         </Link>
       </Section>
 
       <Section>
-        <Link href="/madeiras">
+        <Link to={"/madeiras"} style={{ textDecoration: "none" }}>
           <Img src={woodwind} alt="Woodwind" />
           <Text>Madeiras</Text>
         </Link>
       </Section>
 
       <Section>
-        <Link href="/metais">
+        <Link to={"/metais"} style={{ textDecoration: "none" }}>
           <Img src={brass} alt="Brass" />
           <Text>Metais</Text>
         </Link>
       </Section>
 
       <Section>
-        <Link href="/percussao">
+        <Link to={"/percussao"} style={{ textDecoration: "none" }}>
           <Img src={percussion} alt="Percussion" />
           <Text>Percussão</Text>
         </Link>

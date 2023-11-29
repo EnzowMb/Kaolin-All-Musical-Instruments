@@ -77,6 +77,7 @@ export const Login: React.FC = () => {
         alert("Login bem-sucedido!");
         authenticStore.login({
           email: formData.email,
+          password: formData.password,
           token: response.data.acesstoken,
           name: response.data.name,
           id: response.data.id,

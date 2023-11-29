@@ -40,7 +40,7 @@ export default function EditUserModal({
   const [formData, setFormData] = useState({
     name: user.name,
     email: user.email,
-    password: "",
+    password: user.password,
   });
 
   const handleEnableDisableClick = () => {
