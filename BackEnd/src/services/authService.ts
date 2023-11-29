@@ -12,7 +12,6 @@ export class AuthService {
       },
     });
 
-    //Retornar erro
     if (!user) {
       return null;
     }

@@ -16,8 +16,6 @@ export class UserService {
       },
     });
 
-    console.log(user);
-
     if (!userExist) {
       const passwordHash = await hash(user.getPassword(), 8); //8 -> saltRounds
 
