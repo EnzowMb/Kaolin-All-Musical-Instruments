@@ -4,7 +4,7 @@ export class Instrument {
   constructor(
     private name: string,
     private family: EfamilyInstrument,
-    private date: Date,
+    private date: string,
     private id?: string
   ) {
     this.name = name;
@@ -21,7 +21,7 @@ export class Instrument {
     return this.family;
   }
 
-  getDate(): Date {
+  getDate(): string {
     return this.date;
   }
 }

@@ -13,9 +13,16 @@ export class InstrumentController {
 
   createInstrument = async (req: Request, res: Response) => {
     try {
-      const { name, family } = req.body as InstrumentType;
-      Validation.InstrumentSchema.parse({ name: name, family: family });
-      const instrumentModel = new Instrument(name, family);
+      const { name, family, date } = req.body as InstrumentType;
+
+      Validation.InstrumentSchema.parse({
+        name: name,
+        family: family,
+        date: date,
+      });
+
+      const instrumentModel = new Instrument(name, family, date);
+
       const newInstrument = await this.instrumentService.createInstrument(
         instrumentModel
       );

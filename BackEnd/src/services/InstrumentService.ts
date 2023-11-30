@@ -8,11 +8,13 @@ export class InstrumentService {
       data: {
         name: instrument.getName(),
         family: instrument.getFamily(),
+        date: instrument.getDate(),
       },
       select: {
         id: false,
         name: true,
         family: true,
+        date: true,
       },
     });
   };
