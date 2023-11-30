@@ -4,10 +4,12 @@ export class Instrument {
   constructor(
     private name: string,
     private family: EfamilyInstrument,
+    private date: Date,
     private id?: string
   ) {
     this.name = name;
     this.family = family;
+    this.date = date;
     this.id = id;
   }
 
@@ -17,5 +19,9 @@ export class Instrument {
 
   getFamily(): EfamilyInstrument {
     return this.family;
+  }
+
+  getDate(): Date {
+    return this.date;
   }
 }
