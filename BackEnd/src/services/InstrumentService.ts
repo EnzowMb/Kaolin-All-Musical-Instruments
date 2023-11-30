@@ -42,7 +42,11 @@ export class InstrumentService {
     });
   };
 
-  deleteInstrument = async (instrumentID: string) => {};
+  deleteInstrument = async (instrumentID: string) => {
+    return instrumentRepository.delete({
+      where: { id: instrumentID },
+    });
+  };
 
   getAllInstrument = async () => {
     return await instrumentRepository.findMany();
