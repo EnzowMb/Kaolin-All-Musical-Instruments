@@ -14,9 +14,9 @@ model Instrument {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   name   String
   family String
-  userEmail String?
+  userEmail String
   date String
-  user User? @relation(fields: [userEmail], references: [email])
+  user User @relation(fields: [userEmail], references: [email])
 }
 
 model User {

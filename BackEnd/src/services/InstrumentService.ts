@@ -9,12 +9,18 @@ export class InstrumentService {
         name: instrument.getName(),
         family: instrument.getFamily(),
         date: instrument.getDate(),
+        user: {
+          connect: {
+            email: instrument.getUserEmail(),
+          },
+        },
       },
       select: {
         id: false,
         name: true,
         family: true,
         date: true,
+        user: true,
       },
     });
   };

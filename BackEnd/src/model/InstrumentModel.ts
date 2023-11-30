@@ -5,6 +5,7 @@ export class Instrument {
     private name: string,
     private family: EfamilyInstrument,
     private date: string,
+    private userEmail: string,
     private id?: string
   ) {
     this.name = name;
@@ -23,5 +24,9 @@ export class Instrument {
 
   getDate(): string {
     return this.date;
+  }
+
+  getUserEmail() {
+    return this.userEmail;
   }
 }

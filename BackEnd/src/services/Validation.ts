@@ -35,6 +35,9 @@ export class Validation {
       .refine((value) => isDateValid(value), {
         message: 'Invalid date format. Must be in dd/mm/yyyy format.',
       }),
+    userEmail: z
+      .string({ required_error: 'Necessita do email do criador' })
+      .email({ message: 'Email invalido' }),
   });
 
   static LoginSchema = z.object({
