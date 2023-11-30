@@ -25,7 +25,22 @@ export class InstrumentService {
     });
   };
 
-  updateInstrument = async (instrumentID: string, instrument: Instrument) => {};
+  updateInstrument = async (instrumentID: string, instrument: Instrument) => {
+    return instrumentRepository.update({
+      where: { id: instrumentID },
+      data: {
+        name: instrument.getName(),
+        family: instrument.getFamily(),
+        date: instrument.getDate(),
+      },
+      select: {
+        id: false,
+        name: true,
+        family: true,
+        date: true,
+      },
+    });
+  };
 
   deleteInstrument = async (instrumentID: string) => {};
 
