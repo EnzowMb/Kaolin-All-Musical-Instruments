@@ -17,6 +17,10 @@ export class InstrumentService {
     });
   };
 
+  updateInstrument = async (instrumentID: string, instrument: Instrument) => {};
+
+  deleteInstrument = async (instrumentID: string) => {};
+
   getAllInstrument = async () => {
     return await instrumentRepository.findMany();
   };
