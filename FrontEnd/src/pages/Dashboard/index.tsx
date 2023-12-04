@@ -7,6 +7,7 @@ import RegisterModal from "./RegisterInstrumentModal";
 import EditModal from "./EditUserModal";
 import { authenticStore } from "../../stores/authentic.store";
 import { InstrumentCard } from "../../components/InstrumentCard";
+import { useDelete } from "../../services/useDelete";
 
 const UserContainer = styled(Container)`
   display: flex;
@@ -29,6 +30,8 @@ export const Dashboard = () => {
 
   const { user } = authenticStore;
 
+  const { deleteData } = useDelete();
+
   const handleOpenRegister = () => {
     setOpenModalRegister(true);
   };
@@ -45,15 +48,30 @@ export const Dashboard = () => {
     setOpenModalEdit(false);
   };
 
+  const handleDelete = async (id: string) => {
+    alert("Are you sure you want to delete");
+
+    await deleteData({
+      url: `instrument/${id}`,
+      token: user.token,
+    });
+  };
+
   return (
     <UserContainer>
       <div>
         {user.instruments.map((instrument) => (
-          <InstrumentCard
-            name={instrument.name}
-            family={instrument.family}
-            date={instrument.date}
-          />
+          <>
+            <InstrumentCard
+              name={instrument.name}
+              family={instrument.family}
+              date={instrument.date}
+            />
+            <CustomizedButton
+              onClick={() => handleDelete(instrument.id)}
+              label="Excluir"
+            />
+          </>
         ))}
       </div>
       <Title>Perfil do Usuario!</Title>
