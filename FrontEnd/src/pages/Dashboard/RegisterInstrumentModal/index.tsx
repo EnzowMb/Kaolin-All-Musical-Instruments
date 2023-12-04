@@ -88,6 +88,17 @@ export default function RegisterInstrumentModal({
     });
   };
 
+  const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const parts = value.split("-");
+    const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+    console.log(formattedDate);
+    setFormData({
+      ...formData,
+      [name]: formattedDate,
+    });
+  };
+
   const handleChangeSelect = (e: SelectChangeEvent) => {
     const { name, value } = e.target;
     setFormData({
@@ -106,6 +117,13 @@ export default function RegisterInstrumentModal({
       formData.date === ""
     ) {
       alert("Por favor, preencha todos os campos.");
+      return;
+    }
+
+    if (
+      !/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/.test(formData.date)
+    ) {
+      alert("Por favor, insira um data valida!.");
       return;
     }
 
@@ -164,7 +182,7 @@ export default function RegisterInstrumentModal({
             placeholder="01/01/2001"
             name="date"
             value={formData.date}
-            onChange={handleChange}
+            onChange={handleChangeDate}
           />
           <CustomizedButton label="Cadastrar" />
         </form>

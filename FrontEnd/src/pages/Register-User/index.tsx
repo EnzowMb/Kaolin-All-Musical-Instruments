@@ -40,6 +40,7 @@ const Form = styled.form`
 `;
 
 const CustomButton = styled(Button)`
+  margin: 0.3em;
   width: 50%;
 `;
 
@@ -181,9 +182,6 @@ export const RegisterUser: React.FC = () => {
                   required
                 />
                 <CustomButton type="submit" label="Cadastrar-se" />
-                <Link to={"/"}>
-                  <CustomButton type="button" label={"Cancelar"} />
-                </Link>
               </>
             )}
           </Form>
