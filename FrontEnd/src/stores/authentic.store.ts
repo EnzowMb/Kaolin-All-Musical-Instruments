@@ -6,11 +6,27 @@ interface IUsuario {
   email: string;
   password: string;
   token: string;
+  instruments: Instrument[];
+}
+
+interface Instrument {
+  id: string;
+  name: string;
+  family: string;
+  date: string;
+  userEmail: string;
 }
 
 class AuthenticStore {
   isAuthentic = false;
-  user: IUsuario = { email: "", password: "", token: "", name: "", id: "" };
+  user: IUsuario = {
+    email: "",
+    password: "",
+    token: "",
+    name: "",
+    id: "",
+    instruments: [],
+  };
 
   constructor() {
     makeObservable(this, {
@@ -21,14 +37,21 @@ class AuthenticStore {
     });
   }
 
-  login({ email, password, token, name, id }: IUsuario) {
+  login({ email, password, token, name, id, instruments }: IUsuario) {
     this.isAuthentic = true;
-    this.user = { email, password, token, name, id };
+    this.user = { email, password, token, name, id, instruments };
   }
 
   logout() {
     this.isAuthentic = false;
-    this.user = { email: "", password: "", token: "", name: "", id: "" };
+    this.user = {
+      email: "",
+      password: "",
+      token: "",
+      name: "",
+      id: "",
+      instruments: [],
+    };
   }
 }
 

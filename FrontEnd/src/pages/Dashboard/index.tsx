@@ -5,6 +5,7 @@ import { Button } from "../../components/Button";
 import { useState } from "react";
 import RegisterModal from "./RegisterInstrumentModal";
 import EditModal from "./EditUserModal";
+import { authenticStore } from "../../stores/authentic.store";
 
 const UserContainer = styled(Container)`
   display: flex;
@@ -25,6 +26,8 @@ export const Dashboard = () => {
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false);
 
+  const { user } = authenticStore;
+
   const handleOpenRegister = () => {
     setOpenModalRegister(true);
   };
@@ -43,6 +46,11 @@ export const Dashboard = () => {
 
   return (
     <UserContainer>
+      <div>
+        {user.instruments.map((instrument) => (
+          <p>{instrument.name}</p>
+        ))}
+      </div>
       <Title>Perfil do Usuario!</Title>
       <CustomizedButton
         onClick={() => handleOpenEdit()}

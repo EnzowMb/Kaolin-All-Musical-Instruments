@@ -10,6 +10,13 @@ export class AuthService {
       where: {
         email: dto.email,
       },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        password: true,
+        instruments: true,
+      },
     });
 
     if (!user) {

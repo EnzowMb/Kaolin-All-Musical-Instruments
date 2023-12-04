@@ -40,6 +40,7 @@ const StyleSelect = styled(Select)`
   paddingleft: 24;
   paddingtop: 14;
   paddingbottom: 15;
+  margin-bottom: 1em;
   boxshadow: 0px 5px 8px -3px rgba(0, 0, 0, 0.14);
   &:focus: {
     borderradius: 12;
@@ -70,12 +71,14 @@ export default function RegisterInstrumentModal({
   open: boolean;
   handleClose: () => void;
 }) {
+  const { registerData } = usePost();
+  const { user } = authenticStore;
   const [formData, setFormData] = useState({
     name: "",
     family: "",
+    date: "",
+    userEmail: user.email,
   });
-  const { registerData } = usePost();
-  const { user } = authenticStore;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -99,7 +102,8 @@ export default function RegisterInstrumentModal({
     if (
       formData.name === "" ||
       formData.family === "none" ||
-      formData.family === ""
+      formData.family === "" ||
+      formData.date === ""
     ) {
       alert("Por favor, preencha todos os campos.");
       return;
@@ -154,6 +158,14 @@ export default function RegisterInstrumentModal({
               <MenuItem value="percussao">Percussão</MenuItem>
             </StyleSelect>
           </FormControl>
+          <TitledInput
+            label={"Data de lançamento"}
+            type="date"
+            placeholder="01/01/2001"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+          />
           <CustomizedButton label="Cadastrar" />
         </form>
       </CustomizedBox>

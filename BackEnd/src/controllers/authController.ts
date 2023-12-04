@@ -25,6 +25,7 @@ export class AuthController {
           id: login.user.id,
           name: login.user.name,
           email: login.user.email,
+          instruments: login.user.instruments,
         });
       } else {
         return res.status(400).send({ message: 'Invalid User or Password' });

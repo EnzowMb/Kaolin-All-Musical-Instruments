@@ -81,6 +81,7 @@ export const Login: React.FC = () => {
           token: response.data.acesstoken,
           name: response.data.name,
           id: response.data.id,
+          instruments: response.data.instruments,
         });
         response && navigate("/dashboard");
       })
