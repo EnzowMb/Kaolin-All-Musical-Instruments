@@ -8,6 +8,8 @@ const instrumentController = new InstrumentController();
 router
   .get('/', instrumentController.getAllInstrument)
   .get('/family', instrumentController.getInstrumentFilterString)
-  .post('/create', auth, instrumentController.createInstrument);
+  .post('/create', auth, instrumentController.createInstrument)
+  .put('/:id', auth, instrumentController.updateInstrument)
+  .delete('/:id', auth, instrumentController.deleteInstrument);
 
 export const instrumentRoute = router;
