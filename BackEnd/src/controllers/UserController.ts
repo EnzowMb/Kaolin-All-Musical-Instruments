@@ -62,6 +62,4 @@ export class UserController {
       return res.json(error);
     }
   };
-
-  updateFavoriteInstruments = async (req: Request, res: Response) => {};
 }

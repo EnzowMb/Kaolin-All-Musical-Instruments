@@ -29,6 +29,7 @@ export class UserService {
           id: false,
           name: true,
           email: true,
+          instruments: true,
           password: false,
         },
       });
@@ -38,12 +39,27 @@ export class UserService {
   };
 
   getAllUser = () => {
-    return userRepository.findMany();
+    return userRepository.findMany({
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        instruments: true,
+        password: false,
+      },
+    });
   };
 
   getUser = (userId: string) => {
     return userRepository.findUnique({
       where: { id: userId },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        instruments: true,
+        password: false,
+      },
     });
   };
 
