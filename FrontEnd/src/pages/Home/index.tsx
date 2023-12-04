@@ -35,7 +35,11 @@ export function Home() {
           <TypeInstrument />
         </Container>
         {instruments.map((instrument) => (
-          <InstrumentCard name={instrument.name} family={instrument.family} />
+          <InstrumentCard
+            name={instrument.name}
+            family={instrument.family}
+            date={instrument.date}
+          />
         ))}
       </div>
     </div>

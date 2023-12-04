@@ -19,7 +19,11 @@ export const WoodWind = () => {
   return (
     <div className="elements">
       {instruments.map((instrument) => (
-        <InstrumentCard name={instrument.name} family={instrument.family} />
+        <InstrumentCard
+          name={instrument.name}
+          family={instrument.family}
+          date={instrument.date}
+        />
       ))}
     </div>
   );

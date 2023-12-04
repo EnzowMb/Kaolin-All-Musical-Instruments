@@ -6,6 +6,7 @@ import { useState } from "react";
 import RegisterModal from "./RegisterInstrumentModal";
 import EditModal from "./EditUserModal";
 import { authenticStore } from "../../stores/authentic.store";
+import { InstrumentCard } from "../../components/InstrumentCard";
 
 const UserContainer = styled(Container)`
   display: flex;
@@ -48,7 +49,11 @@ export const Dashboard = () => {
     <UserContainer>
       <div>
         {user.instruments.map((instrument) => (
-          <p>{instrument.name}</p>
+          <InstrumentCard
+            name={instrument.name}
+            family={instrument.family}
+            date={instrument.date}
+          />
         ))}
       </div>
       <Title>Perfil do Usuario!</Title>
