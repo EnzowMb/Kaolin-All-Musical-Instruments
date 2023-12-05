@@ -35,6 +35,7 @@ export const Dashboard = () => {
     name: "",
     family: "",
     date: "",
+    userEmail: "",
   });
 
   const { user } = authenticStore;
