@@ -8,6 +8,8 @@ import EditModal from "./EditUserModal";
 import { authenticStore } from "../../stores/authentic.store";
 import { InstrumentCard } from "../../components/InstrumentCard";
 import { useDelete } from "../../services/useDelete";
+import EditInstrumentModal from "./EditInstrumentModal";
+import { Instrument } from "../type";
 
 const UserContainer = styled(Container)`
   display: flex;
@@ -26,7 +28,14 @@ const CustomizedButton = styled(Button)`
 
 export const Dashboard = () => {
   const [openModalRegister, setOpenModalRegister] = useState(false);
-  const [openModalEdit, setOpenModalEdit] = useState(false);
+  const [openModalEditUser, setOpenModalEditUser] = useState(false);
+  const [openModalEditInstrument, setOpenModalEditInstrument] = useState(false);
+  const [instrumentEdit, setInstrumentEdit] = useState({
+    id: "",
+    name: "",
+    family: "",
+    date: "",
+  });
 
   const { user } = authenticStore;
 
@@ -40,12 +49,22 @@ export const Dashboard = () => {
     setOpenModalRegister(false);
   };
 
-  const handleOpenEdit = () => {
-    setOpenModalEdit(true);
+  const handleOpenEditUser = () => {
+    setOpenModalEditUser(true);
   };
 
-  const handleCloseEdit = () => {
-    setOpenModalEdit(false);
+  const handleCloseEditUser = () => {
+    setOpenModalEditUser(false);
+  };
+
+  const handleOpenEditInstrument = (instrument: Instrument) => {
+    setInstrumentEdit(instrument);
+    console.log(instrument.name);
+    setOpenModalEditInstrument(true);
+  };
+
+  const handleCloseEditInstrument = () => {
+    setOpenModalEditInstrument(false);
   };
 
   const handleDelete = async (id: string) => {
@@ -71,12 +90,16 @@ export const Dashboard = () => {
               onClick={() => handleDelete(instrument.id)}
               label="Excluir"
             />
+            <CustomizedButton
+              onClick={() => handleOpenEditInstrument(instrument)}
+              label="Editar"
+            />
           </>
         ))}
       </div>
       <Title>Perfil do Usuario!</Title>
       <CustomizedButton
-        onClick={() => handleOpenEdit()}
+        onClick={() => handleOpenEditUser()}
         label="Editar Usuario"
       />
       <CustomizedButton
@@ -87,7 +110,12 @@ export const Dashboard = () => {
         open={openModalRegister}
         handleClose={handleCloseRegister}
       />
-      <EditModal open={openModalEdit} handleClose={handleCloseEdit} />
+      <EditModal open={openModalEditUser} handleClose={handleCloseEditUser} />
+      <EditInstrumentModal
+        open={openModalEditInstrument}
+        handleClose={handleCloseEditInstrument}
+        instrument={instrumentEdit}
+      />
     </UserContainer>
   );
 };
