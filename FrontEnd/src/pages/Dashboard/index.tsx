@@ -26,6 +26,15 @@ const CustomizedButton = styled(Button)`
   padding: 2em;
 `;
 
+const CardEdit = styled.div`
+  display: block;
+  background-image: linear-gradient(90deg, #e0c821 35%, #c6b832);
+  padding: 1em;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+  border: 1px solid;
+`;
+
 export const Dashboard = () => {
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const [openModalEditUser, setOpenModalEditUser] = useState(false);
@@ -79,7 +88,8 @@ export const Dashboard = () => {
 
   return (
     <UserContainer>
-      <div>
+      <Title>Seus instrumentos</Title>
+      <CardEdit>
         {user.instruments.map((instrument) => (
           <>
             <InstrumentCard
@@ -97,7 +107,7 @@ export const Dashboard = () => {
             />
           </>
         ))}
-      </div>
+      </CardEdit>
       <Title>Perfil do Usuario!</Title>
       <CustomizedButton
         onClick={() => handleOpenEditUser()}

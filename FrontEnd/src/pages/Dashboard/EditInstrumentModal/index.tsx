@@ -98,13 +98,6 @@ export default function EditInstrumentModal({
         date: formattedDate,
         userEmail: instrument.userEmail,
       });
-    } else {
-      setFormData({
-        name: "",
-        family: "",
-        date: "",
-        userEmail: "",
-      });
     }
   }, [open, instrument]);
 
@@ -138,6 +131,12 @@ export default function EditInstrumentModal({
       alert("Por favor, insira um data valida!.");
       return;
     }
+    setFormData({
+      name: formData.name,
+      family: formData.family,
+      date: formData.date,
+      userEmail: formData.userEmail,
+    });
 
     await updateData({
       url: `instrument/${instrument.id}`,
