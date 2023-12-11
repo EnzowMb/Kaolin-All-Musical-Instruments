@@ -1,6 +1,7 @@
 import { EfamilyInstrument } from '../model/EfamilyInstrument';
 import { Instrument } from '../model/InstrumentModel';
 import { instrumentRepository } from '../repositories/InstrumentRepository';
+import fs from 'fs';
 
 export class InstrumentService {
   createInstrument = async (instrument: Instrument) => {
@@ -36,17 +37,33 @@ export class InstrumentService {
         name: instrument.getName(),
         family: instrument.getFamily(),
         date: instrument.getDate(),
+        description: instrument.getDescription(),
+        img: instrument.getImg(),
       },
       select: {
         id: false,
         name: true,
         family: true,
         date: true,
+        description: true,
+        img: true,
       },
     });
   };
 
   deleteInstrument = async (instrumentID: string) => {
+    const instrument = await instrumentRepository.findUnique({
+      where: { id: instrumentID },
+    });
+
+    if (!instrument) {
+      return null;
+    }
+
+    if (instrument.img) {
+      fs.unlinkSync(instrument.img);
+    }
+
     return instrumentRepository.delete({
       where: { id: instrumentID },
     });

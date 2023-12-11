@@ -48,16 +48,28 @@ export class InstrumentController {
   updateInstrument = async (req: Request, res: Response) => {
     try {
       const id = req.params.id;
-      const { name, family, date, userEmail } = req.body as InstrumentType;
+      const { name, family, date, userEmail, description } =
+        req.body as InstrumentType;
+
+      const img = req.file?.path;
 
       Validation.InstrumentSchema.parse({
         name: name,
         family: family,
         date: date,
         userEmail: userEmail,
+        description: description,
+        img: img,
       });
 
-      const instrumentModel = new Instrument(name, family, date, userEmail);
+      const instrumentModel = new Instrument(
+        name,
+        family,
+        date,
+        userEmail,
+        description,
+        img
+      );
 
       const updatedInstrument = await this.instrumentService.updateInstrument(
         id,
@@ -74,9 +86,7 @@ export class InstrumentController {
     try {
       const id = req.params.id;
 
-      const instrumentResult = await this.instrumentService.deleteInstrument(
-        id
-      );
+      await this.instrumentService.deleteInstrument(id);
 
       res.status(200).send({ message: 'Instrumento deletado com sucesso!' });
     } catch (error: any) {
