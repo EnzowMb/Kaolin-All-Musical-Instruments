@@ -38,6 +38,8 @@ export class Validation {
     userEmail: z
       .string({ required_error: 'Necessita do email do criador' })
       .email({ message: 'Email invalido' }),
+    img: z.string().optional(),
+    description: z.string().optional(),
   });
 
   static LoginSchema = z.object({

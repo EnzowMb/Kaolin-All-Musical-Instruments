@@ -9,6 +9,8 @@ export class InstrumentService {
         name: instrument.getName(),
         family: instrument.getFamily(),
         date: instrument.getDate(),
+        img: instrument.getImg(),
+        description: instrument.getDescription(),
         user: {
           connect: {
             email: instrument.getUserEmail(),
@@ -20,6 +22,8 @@ export class InstrumentService {
         name: true,
         family: true,
         date: true,
+        img: true,
+        description: true,
         user: true,
       },
     });
