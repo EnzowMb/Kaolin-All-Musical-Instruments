@@ -16,6 +16,8 @@ model Instrument {
   family String
   userEmail String
   date String
+  img String?
+  description String?
   user User @relation(fields: [userEmail], references: [email])
 }
 

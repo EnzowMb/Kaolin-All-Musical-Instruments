@@ -1,21 +1,16 @@
 import styled from "styled-components";
 
 const Card = styled.div`
+  display: flex;
   align-items: center;
   background-image: linear-gradient(90deg, #e0c675 35%, #c6b3b0);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  display: flex;
   margin: 0 auto;
   max-width: 600px;
-  padding: 25px 20px;
+  padding: 1em;
   justify-content: space-around;
-  width: 100%;
-  transition: transform 0.1s;
-  &:hover {
-    transform: scale(1.04);
-    cursor: pointer;
-  }
+  width: 90%;
 `;
 
 const Desc = styled.div``;
