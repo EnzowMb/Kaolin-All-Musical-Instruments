@@ -31,16 +31,45 @@ const Options = styled.ul`
   justify-content: space-around;
   flex-grow: 1;
   list-style-type: none;
+  padding: 0;
 `;
 
 const Option = styled.li`
   font-size: 1.5em;
   align-items: center;
   text-align: center;
-  height: 100%;
-  padding: 0 5px;
+  list-style: none;
+  display: inline-block;
+  margin: 0 8px;
   cursor: pointer;
   min-width: 120px;
+  &:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: var(--SaddleBrown);
+    transition: width 0.3s;
+  }
+  &:hover {
+    color: #000;
+  }
+  &:hover::after {
+    width: 100%;
+    //transition: width .3s;
+  }
+  a {
+    text-decoration: none;
+    font-size: 1.5rem;
+
+    &:visited {
+      color: #000;
+    }
+  }
+`;
+
+const TextOption = styled.p`
+  display: inline-block;
 `;
 
 const StyledLink = styled.a`
@@ -112,7 +141,7 @@ const Header = () => {
               style={{ textDecoration: "none" }}
             >
               <Option>
-                <p>{text}</p>
+                <TextOption>{text}</TextOption>
               </Option>
             </Link>
           ))}
