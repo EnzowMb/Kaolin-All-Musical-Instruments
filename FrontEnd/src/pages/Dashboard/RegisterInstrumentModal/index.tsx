@@ -14,6 +14,8 @@ import { useState } from "react";
 import { Button } from "../../../components/Button";
 import { authenticStore } from "../../../stores/authentic.store";
 import { usePost } from "../../../services/usePost";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../../../firebase";
 
 const CustomizedBox = styled(Box)`
   position: fixed;
@@ -73,12 +75,16 @@ export default function RegisterInstrumentModal({
 }) {
   const { registerData } = usePost();
   const { user } = authenticStore;
+  // const [imgURL, setImgURL] = useState<string>("");
   const [formData, setFormData] = useState({
     name: "",
     family: "",
     date: "",
+    description: "",
+    img: "",
     userEmail: user.email,
   });
+  const [progress, setProgress] = useState<number>(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -111,7 +117,9 @@ export default function RegisterInstrumentModal({
       formData.name === "" ||
       formData.family === "none" ||
       formData.family === "" ||
-      formData.date === ""
+      formData.date === "" ||
+      formData.description === "" ||
+      formData.img === ""
     ) {
       alert("Por favor, preencha todos os campos.");
       return;
@@ -128,6 +136,32 @@ export default function RegisterInstrumentModal({
       alert("Por favor, insira um data valida!.");
       return;
     }
+
+    // const fileInput = (event.target as HTMLFormElement)[0] as HTMLInputElement;
+    // console.log("file " + fileInput);
+    // const file = fileInput?.files?.[0];
+    // console.log("file " + file);
+    // if (!file) return;
+
+    // const storageRef = ref(storage, `images/${file.name}`);
+    // const uploadTask = uploadBytesResumable(storageRef, file);
+
+    // uploadTask.on(
+    //   "state_changed",
+    //   (snapshot) => {
+    //     const progress =
+    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //     setProgress(progress);
+    //   },
+    //   (error) => {
+    //     alert(error);
+    //   },
+    //   () => {
+    //     getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+    //       setImgURL(url);
+    //     });
+    //   }
+    // );
 
     console.log(user.token);
 
@@ -187,6 +221,23 @@ export default function RegisterInstrumentModal({
             pattern="\d{2}-\d{2}-\d{4}"
             onChange={handleChangeDate}
           />
+          <TitledInput
+            label={"Descrição"}
+            type="text"
+            placeholder="..."
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+          />
+          <TitledInput
+            label={"Imagem"}
+            type="file"
+            name="img"
+            value={formData.img}
+            onChange={handleChange}
+          />
+          {/* {!imgURL && <progress value={progress} max="100" />}
+          {imgURL && <img src={imgURL} alt="Imagem" />} */}
           <CustomizedButton label="Cadastrar" />
         </form>
       </CustomizedBox>

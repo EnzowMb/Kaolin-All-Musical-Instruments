@@ -16,15 +16,12 @@ export class InstrumentController {
       const { name, family, date, userEmail, description } =
         req.body as InstrumentType;
 
-      const img = req.file?.path;
-
       Validation.InstrumentSchema.parse({
         name: name,
         family: family,
         date: date,
         userEmail: userEmail,
         description: description,
-        img: img,
       });
 
       const instrumentModel = new Instrument(
@@ -32,8 +29,7 @@ export class InstrumentController {
         family,
         date,
         userEmail,
-        description,
-        img
+        description
       );
 
       const newInstrument = await this.instrumentService.createInstrument(
@@ -51,15 +47,12 @@ export class InstrumentController {
       const { name, family, date, userEmail, description } =
         req.body as InstrumentType;
 
-      const img = req.file?.path;
-
       Validation.InstrumentSchema.parse({
         name: name,
         family: family,
         date: date,
         userEmail: userEmail,
         description: description,
-        img: img,
       });
 
       const instrumentModel = new Instrument(
@@ -67,8 +60,7 @@ export class InstrumentController {
         family,
         date,
         userEmail,
-        description,
-        img
+        description
       );
 
       const updatedInstrument = await this.instrumentService.updateInstrument(
