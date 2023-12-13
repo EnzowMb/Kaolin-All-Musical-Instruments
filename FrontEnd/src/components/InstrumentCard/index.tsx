@@ -34,13 +34,33 @@ const Family = styled.div`
   margin: 15px 0;
 `;
 
+const Description = styled.div`
+  background-color: var(--gray);
+  border-radius: 10px;
+  padding: 1em;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+  font-size: 1em;
+`;
+
+const Date = styled.p`
+  background-color: var(--HoneyDew);
+  padding: 0.5em;
+  border-radius: 10px;
+`;
+
 interface InstrumentCardProps {
   name: string;
   family: string;
   date: string;
+  description: string;
 }
 
-export const InstrumentCard = ({ name, family, date }: InstrumentCardProps) => {
+export const InstrumentCard = ({
+  name,
+  family,
+  date,
+  description,
+}: InstrumentCardProps) => {
   return (
     <Card>
       <Main>
@@ -48,7 +68,8 @@ export const InstrumentCard = ({ name, family, date }: InstrumentCardProps) => {
       </Main>
       <Desc>
         <Family>{family}</Family>
-        <p>Ano de criação: {date}</p>
+        <Description>{description}</Description>
+        <Date>Ano de criação: {date}</Date>
       </Desc>
     </Card>
   );

@@ -22,6 +22,7 @@ export const Brass = () => {
           name={instrument.name}
           family={instrument.family}
           date={instrument.date}
+          description={instrument.description}
         />
       ))}
     </div>
