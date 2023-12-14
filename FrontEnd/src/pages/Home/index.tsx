@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { Seacrh } from "./Search";
 import { TypeInstrument } from "./TypeInstrument";
 
-const Container = styled.section`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

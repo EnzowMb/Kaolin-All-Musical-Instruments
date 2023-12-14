@@ -67,7 +67,7 @@ export const InstrumentCard = ({
         <Title>{name}</Title>
       </Main>
       <Desc>
-        <Family>{family}</Family>
+        <Family>{family[0].toUpperCase() + family.substring(1)}</Family>
         <Description>{description}</Description>
         <Date>Ano de criação: {date}</Date>
       </Desc>
