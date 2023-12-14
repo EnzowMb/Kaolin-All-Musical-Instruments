@@ -13,7 +13,7 @@ const MainContainer = styled.div`
 `;
 
 const Container = styled.div`
-  background-color: white;
+  background-color: var(--HoneyDew);
   width: 50vw;
   height: 100%;
   display: flex;

@@ -10,6 +10,7 @@ import { authenticStore } from "../../stores/authentic.store";
 const Image = styled.img`
   padding: 2em 0;
   width: 10em;
+  border-radius: 10em;
 `;
 
 const Title = styled.h2`
