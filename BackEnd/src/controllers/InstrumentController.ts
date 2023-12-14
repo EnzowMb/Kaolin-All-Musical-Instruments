@@ -3,6 +3,8 @@ import { InstrumentType, Validation } from '../services/Validation';
 import { Instrument } from '../model/InstrumentModel';
 import { InstrumentService } from '../services/InstrumentService';
 import { EfamilyInstrument } from '../model/EfamilyInstrument';
+import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
+import { storage } from '../config/firebase';
 
 export class InstrumentController {
   instrumentService: InstrumentService;
@@ -16,12 +18,38 @@ export class InstrumentController {
       const { name, family, date, userEmail, description } =
         req.body as InstrumentType;
 
+      const dateTime = giveCurrentDateTime();
+
+      const storageRef = ref(
+        storage,
+        `files/${req.file?.originalname + '  ' + dateTime}`
+      );
+
+      //Create file metadata including the content type
+      const metadata = {
+        contentType: req.file?.mimetype,
+      };
+
+      //Upload the file in the bucket storage
+      const snapshot = await uploadBytesResumable(
+        storageRef,
+        req.file?.buffer as Buffer,
+        metadata
+      );
+      //by using uploadBytesResumable we can control the progress of uploading like pause, resume, etc
+
+      //Grab the public url
+      const downloadURL = await getDownloadURL(snapshot.ref);
+
+      console.log('File sucessfully uploaded');
+
       Validation.InstrumentSchema.parse({
         name: name,
         family: family,
         date: date,
         userEmail: userEmail,
         description: description,
+        img: downloadURL,
       });
 
       const instrumentModel = new Instrument(
@@ -29,7 +57,8 @@ export class InstrumentController {
         family,
         date,
         userEmail,
-        description
+        description,
+        downloadURL
       );
 
       const newInstrument = await this.instrumentService.createInstrument(
@@ -134,3 +163,13 @@ export class InstrumentController {
     }
   };
 }
+
+const giveCurrentDateTime = () => {
+  const today = new Date();
+  const date =
+    today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  const time =
+    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+  const dateTime = date + ' ' + time;
+  return dateTime;
+};

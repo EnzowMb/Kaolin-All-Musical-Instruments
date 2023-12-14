@@ -14,8 +14,6 @@ import { useState } from "react";
 import { Button } from "../../../components/Button";
 import { authenticStore } from "../../../stores/authentic.store";
 import { usePost } from "../../../services/usePost";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { storage } from "../../../firebase";
 
 const CustomizedBox = styled(Box)`
   position: fixed;
@@ -75,64 +73,46 @@ export default function RegisterInstrumentModal({
 }) {
   const { registerData } = usePost();
   const { user } = authenticStore;
-  // const [imgURL, setImgURL] = useState<string>("");
+
+  const [name, setName] = useState("");
+  const [family, setFamily] = useState("");
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
+  const [imgURL, setImgURL] = useState<File>();
+  const [userEmail, setUserEmail] = useState("");
+
   const [formData, setFormData] = useState({
     name: "",
     family: "",
     date: "",
     description: "",
-    img: "",
+    img: imgURL,
     userEmail: user.email,
   });
   const [progress, setProgress] = useState<number>(0);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleChangeSelect = (e: SelectChangeEvent) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (
-      formData.name === "" ||
-      formData.family === "none" ||
-      formData.family === "" ||
-      formData.date === "" ||
-      formData.description === "" ||
-      formData.img === ""
+      name === "" ||
+      family === "none" ||
+      family === "" ||
+      date === "" ||
+      description === "" ||
+      !imgURL
     ) {
       alert("Por favor, preencha todos os campos.");
       return;
     }
 
-    const parts = formData.date.split("-");
+    const parts = date.split("-");
     const formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
     console.log(formattedDate);
-    formData.date = formattedDate;
+    setDate(formattedDate);
+    console.log(date);
 
-    if (
-      !/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/.test(formData.date)
-    ) {
+    if (!/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/.test(date)) {
       alert("Por favor, insira um data valida!.");
       return;
     }
@@ -163,13 +143,13 @@ export default function RegisterInstrumentModal({
     //   }
     // );
 
-    console.log(user.token);
+    console.log(imgURL);
 
-    await registerData({
-      url: "instrument/create",
-      data: formData,
-      token: user.token,
-    });
+    // await registerData({
+    //   url: "instrument/create",
+    //   data: formData,
+    //   token: user.token,
+    // });
 
     handleClose();
   };
@@ -189,8 +169,8 @@ export default function RegisterInstrumentModal({
             type="text"
             placeholder="Insira o nome do Instrumento"
             name="name"
-            value={formData.name}
-            onChange={handleChange}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <Label>Familia</Label>
           <FormControl fullWidth>
@@ -198,10 +178,10 @@ export default function RegisterInstrumentModal({
             <StyleSelect
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={formData.family}
+              value={family}
               name="family"
               label="Familia"
-              onChange={handleChangeSelect}
+              onChange={(e: SelectChangeEvent) => setFamily(e.target.value)}
             >
               <MenuItem value="none">
                 <em>None</em>
@@ -215,26 +195,28 @@ export default function RegisterInstrumentModal({
           <TitledInput
             label={"Data de lançamento"}
             type="date"
-            placeholder="01/01/2001"
             name="date"
-            value={formData.date}
+            value={date}
             pattern="\d{2}-\d{2}-\d{4}"
-            onChange={handleChangeDate}
+            onChange={(e) => setDate(e.target.value)}
           />
           <TitledInput
             label={"Descrição"}
             type="text"
             placeholder="..."
             name="description"
-            value={formData.description}
-            onChange={handleChange}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
           <TitledInput
             label={"Imagem"}
             type="file"
             name="img"
-            value={formData.img}
-            onChange={handleChange}
+            onChange={(e) => {
+              setImgURL(
+                e.currentTarget.files ? e.currentTarget.files[0] : undefined
+              );
+            }}
           />
           {/* {!imgURL && <progress value={progress} max="100" />}
           {imgURL && <img src={imgURL} alt="Imagem" />} */}
