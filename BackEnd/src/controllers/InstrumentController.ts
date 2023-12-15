@@ -20,6 +20,8 @@ export class InstrumentController {
 
       const dateTime = giveCurrentDateTime();
 
+      console.log(req.file);
+
       const storageRef = ref(
         storage,
         `files/${req.file?.originalname + '  ' + dateTime}`

@@ -79,16 +79,7 @@ export default function RegisterInstrumentModal({
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [imgURL, setImgURL] = useState<File>();
-  const [userEmail, setUserEmail] = useState("");
 
-  const [formData, setFormData] = useState({
-    name: "",
-    family: "",
-    date: "",
-    description: "",
-    img: imgURL,
-    userEmail: user.email,
-  });
   const [progress, setProgress] = useState<number>(0);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -109,47 +100,30 @@ export default function RegisterInstrumentModal({
     const parts = date.split("-");
     const formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
     console.log(formattedDate);
-    setDate(formattedDate);
-    console.log(date);
 
-    if (!/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/.test(date)) {
+    if (
+      !/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/.test(formattedDate)
+    ) {
       alert("Por favor, insira um data valida!.");
       return;
     }
 
-    // const fileInput = (event.target as HTMLFormElement)[0] as HTMLInputElement;
-    // console.log("file " + fileInput);
-    // const file = fileInput?.files?.[0];
-    // console.log("file " + file);
-    // if (!file) return;
-
-    // const storageRef = ref(storage, `images/${file.name}`);
-    // const uploadTask = uploadBytesResumable(storageRef, file);
-
-    // uploadTask.on(
-    //   "state_changed",
-    //   (snapshot) => {
-    //     const progress =
-    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //     setProgress(progress);
-    //   },
-    //   (error) => {
-    //     alert(error);
-    //   },
-    //   () => {
-    //     getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-    //       setImgURL(url);
-    //     });
-    //   }
-    // );
-
     console.log(imgURL);
 
-    // await registerData({
-    //   url: "instrument/create",
-    //   data: formData,
-    //   token: user.token,
-    // });
+    const userEmail = user.email;
+
+    await registerData({
+      url: "instrument/create",
+      data: {
+        name,
+        family,
+        date: formattedDate,
+        description,
+        filename: imgURL,
+        userEmail,
+      },
+      token: user.token,
+    });
 
     handleClose();
   };
@@ -163,7 +137,7 @@ export default function RegisterInstrumentModal({
     >
       <CustomizedBox>
         <Title>Cadastre o instrumento inserindo os dados abaixo:</Title>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
           <TitledInput
             label={"Nome"}
             type="text"
@@ -209,9 +183,9 @@ export default function RegisterInstrumentModal({
             onChange={(e) => setDescription(e.target.value)}
           />
           <TitledInput
-            label={"Imagem"}
+            label={"Foto"}
             type="file"
-            name="img"
+            name="filename"
             onChange={(e) => {
               setImgURL(
                 e.currentTarget.files ? e.currentTarget.files[0] : undefined
