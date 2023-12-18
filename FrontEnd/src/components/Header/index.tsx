@@ -3,6 +3,8 @@ import userLogo from "./assets/User-Logo.png";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { authenticStore } from "../../stores/authentic.store";
+import { UserContext } from "../../contexts/UserContext";
+import { useContext } from "react";
 
 const textOptions = ["CORDAS", "MADEIRAS", "METAIS", "PERCUSSAO"];
 
@@ -126,6 +128,7 @@ const Header = () => {
   const handleLogout = () => {
     authenticStore.logout();
   };
+
   const { user } = authenticStore;
 
   return (
