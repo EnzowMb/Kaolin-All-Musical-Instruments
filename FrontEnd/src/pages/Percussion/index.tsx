@@ -23,6 +23,7 @@ export const Percussion = () => {
           family={instrument.family}
           date={instrument.date}
           description={instrument.description}
+          img={instrument.img}
         />
       ))}
     </div>

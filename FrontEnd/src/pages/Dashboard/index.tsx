@@ -45,6 +45,7 @@ export const Dashboard = () => {
     family: "",
     date: "",
     description: "",
+    img: "",
     userEmail: "",
   });
 
@@ -98,6 +99,7 @@ export const Dashboard = () => {
               family={instrument.family}
               date={instrument.date}
               description={instrument.description}
+              img={instrument.img}
             />
             <CustomizedButton
               onClick={() => handleDelete(instrument.id)}

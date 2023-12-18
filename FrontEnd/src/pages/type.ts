@@ -4,6 +4,7 @@ export interface Instrument {
   family: string;
   date: string;
   description: string;
+  img: string;
   userEmail: string;
 }
 

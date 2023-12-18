@@ -21,6 +21,14 @@ const Title = styled.h3`
   text-align: center;
 `;
 
+const Image = styled.img`
+  max-width: 100%;
+  overflow: hidden;
+  border: 10px solid #eaf0ff;
+  border-radius: 50%;
+  width: 10em;
+`;
+
 const Main = styled.div``;
 
 const Desc = styled.div`
@@ -53,6 +61,7 @@ interface InstrumentCardProps {
   family: string;
   date: string;
   description: string;
+  img: string;
 }
 
 export const InstrumentCard = ({
@@ -60,11 +69,13 @@ export const InstrumentCard = ({
   family,
   date,
   description,
+  img,
 }: InstrumentCardProps) => {
   return (
     <Card>
       <Main>
         <Title>{name}</Title>
+        <Image src={img} alt="Instrumento" />
       </Main>
       <Desc>
         <Family>{family[0].toUpperCase() + family.substring(1)}</Family>
