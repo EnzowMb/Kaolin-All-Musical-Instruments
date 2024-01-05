@@ -58,6 +58,8 @@ export const Login: React.FC = () => {
   const [response, setResponse] = useState("");
   const navigate = useNavigate();
 
+  const { user, setUser } = useContext(UserContext);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -85,6 +87,13 @@ export const Login: React.FC = () => {
           id: response.data.id,
           instruments: response.data.instruments,
         });
+        useEffect(() => {
+          setUser({
+            name: response.data.name,
+            email: formData.email,
+            password: formData.password,
+          });
+        }, []);
         response && navigate("/dashboard");
       })
       .catch((error) => {
