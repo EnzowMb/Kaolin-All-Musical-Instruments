@@ -60,10 +60,6 @@ export class InstrumentService {
       return null;
     }
 
-    if (instrument.img) {
-      fs.unlinkSync(instrument.img);
-    }
-
     return instrumentRepository.delete({
       where: { id: instrumentID },
     });

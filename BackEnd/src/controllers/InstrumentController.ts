@@ -111,7 +111,9 @@ export class InstrumentController {
 
       await this.instrumentService.deleteInstrument(id);
 
-      res.status(200).send({ message: 'Instrumento deletado com sucesso!' });
+      console.log('opa');
+
+      res.status(204).send({ message: 'Instrumento deletado com sucesso!' });
     } catch (error: any) {
       return res.json(error);
     }

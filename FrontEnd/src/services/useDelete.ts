@@ -6,7 +6,7 @@ export function useDelete() {
   const [sucess, setSucess] = useState(false);
   const [response, setResponse] = useState("");
 
-  async function deleteData<T>({ url, token }: { url: string; token: string }) {
+  async function deleteData({ url, token }: { url: string; token: string }) {
     try {
       const response = await axios.delete(`http://localhost:8000/${url}`, {
         headers: {
