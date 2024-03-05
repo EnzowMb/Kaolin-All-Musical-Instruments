@@ -11,10 +11,10 @@ import styled from "styled-components";
 import { Title } from "../../../components/Title";
 import { TitledInput } from "../../../components/TitledInput";
 import { useEffect, useState } from "react";
-import { authenticStore } from "../../../stores/authentic.store";
 import { Button } from "../../../components/Button";
 import { usePut } from "../../../services/usePut";
 import { Instrument } from "../../type";
+import { useAuth } from "../../../contexts/authContext";
 
 const CustomizedBox = styled(Box)`
   position: fixed;
@@ -74,7 +74,7 @@ export default function EditInstrumentModal({
   handleClose: () => void;
   instrument: Instrument;
 }) {
-  const { user } = authenticStore;
+  const { user } = useAuth();
   const { updateData } = usePut();
 
   const convertDateFormat = (inputDate: string) => {
@@ -141,7 +141,7 @@ export default function EditInstrumentModal({
     await updateData({
       url: `instrument/${instrument.id}`,
       data: formData,
-      token: user.token,
+      token: user?.acesstoken,
     });
 
     handleClose();

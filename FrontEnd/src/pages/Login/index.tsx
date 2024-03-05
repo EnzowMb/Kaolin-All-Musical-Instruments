@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { TitledInput } from "../../components/TitledInput";
 import { Button } from "../../components/Button";
 import axios from "axios";
 import styled from "styled-components";
 import logo from "../../Img/Logo.png";
 import { authenticStore } from "../../stores/authentic.store";
-import { UserContext } from "../../contexts/UserContext";
+import { TitledInput } from "../../components/TitledInput";
+import { useAuth } from "../../contexts/authContext";
 
 const Image = styled.img`
   padding: 2em 0;
@@ -56,9 +56,10 @@ export const Login: React.FC = () => {
   });
 
   const [response, setResponse] = useState("");
-  const navigate = useNavigate();
 
-  const { user, setUser } = useContext(UserContext);
+  const { login } = useAuth();
+
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -75,30 +76,10 @@ export const Login: React.FC = () => {
       alert("Por favor, preencha todos os campos antes de fazer o login.");
       return;
     }
-    await axios
-      .post("http://localhost:8000/login", formData)
-      .then((response) => {
-        alert("Login bem-sucedido!");
-        authenticStore.login({
-          email: formData.email,
-          password: formData.password,
-          token: response.data.acesstoken,
-          name: response.data.name,
-          id: response.data.id,
-          instruments: response.data.instruments,
-        });
-        useEffect(() => {
-          setUser({
-            name: response.data.name,
-            email: formData.email,
-            password: formData.password,
-          });
-        }, []);
-        response && navigate("/dashboard");
-      })
-      .catch((error) => {
-        alert("Email ou senha incorretos. Tente novamente.");
-      });
+
+    await login(formData);
+
+    navigate("/dashboard");
   };
 
   return (

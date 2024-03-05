@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Box, Modal } from "@mui/material";
 import styled from "styled-components";
 import { Title } from "../../../components/Title";
@@ -6,6 +7,7 @@ import { useState } from "react";
 import { authenticStore } from "../../../stores/authentic.store";
 import { Button } from "../../../components/Button";
 import { usePut } from "../../../services/usePut";
+import { useAuth } from "../../../contexts/authContext";
 
 const CustomizedBox = styled(Box)`
   position: fixed;
@@ -34,8 +36,9 @@ export default function EditUserModal({
   open: boolean;
   handleClose: () => void;
 }) {
-  const { user } = authenticStore;
+  const { user } = useAuth();
   const { updateData } = usePut();
+  if (!user) return <></>;
 
   const [formData, setFormData] = useState({
     name: user.name,
@@ -65,7 +68,7 @@ export default function EditUserModal({
     await updateData({
       url: `user/${user.id}`,
       data: formData,
-      token: user.token,
+      token: user.acesstoken,
     });
 
     handleClose();

@@ -5,11 +5,12 @@ import { Button } from "../../components/Button";
 import { useState } from "react";
 import RegisterModal from "./RegisterInstrumentModal";
 import EditModal from "./EditUserModal";
-import { authenticStore } from "../../stores/authentic.store";
 import { InstrumentCard } from "../../components/InstrumentCard";
 import { useDelete } from "../../services/useDelete";
 import EditInstrumentModal from "./EditInstrumentModal";
 import { Instrument } from "../type";
+import { useAuth } from "../../contexts/authContext";
+import React from "react";
 
 const UserContainer = styled(Container)`
   display: flex;
@@ -49,7 +50,7 @@ export const Dashboard = () => {
     userEmail: "",
   });
 
-  const { user } = authenticStore;
+  const { user, loading } = useAuth();
 
   const { deleteData } = useDelete();
 
@@ -82,35 +83,39 @@ export const Dashboard = () => {
   const handleDelete = async (id: string) => {
     alert("Are you sure you want to delete");
 
-    await deleteData({
-      url: `instrument/${id}`,
-      token: user.token,
-    });
+    if (user)
+      await deleteData({
+        url: `instrument/${id}`,
+        token: user.acesstoken,
+      });
   };
+
+  if (loading) return <></>;
 
   return (
     <UserContainer>
       <Title>Seus instrumentos</Title>
       <CardEdit>
-        {user.instruments.map((instrument) => (
-          <>
-            <InstrumentCard
-              name={instrument.name}
-              family={instrument.family}
-              date={instrument.date}
-              description={instrument.description}
-              img={instrument.img}
-            />
-            <CustomizedButton
-              onClick={() => handleDelete(instrument.id)}
-              label="Excluir"
-            />
-            <CustomizedButton
-              onClick={() => handleOpenEditInstrument(instrument)}
-              label="Editar"
-            />
-          </>
-        ))}
+        {user &&
+          user.instruments.map((instrument) => (
+            <React.Fragment key={instrument.id}>
+              <InstrumentCard
+                name={instrument.name}
+                family={instrument.family}
+                date={instrument.date}
+                description={instrument.description}
+                img={instrument.img}
+              />
+              <CustomizedButton
+                onClick={() => handleDelete(instrument.id)}
+                label="Excluir"
+              />
+              <CustomizedButton
+                onClick={() => handleOpenEditInstrument(instrument)}
+                label="Editar"
+              />
+            </React.Fragment>
+          ))}
       </CardEdit>
       <Title>Perfil do Usuario!</Title>
       <CustomizedButton

@@ -3,8 +3,7 @@ import userLogo from "./assets/User-Logo.png";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { authenticStore } from "../../stores/authentic.store";
-import { UserContext } from "../../contexts/UserContext";
-import { useContext } from "react";
+import { useAuth } from "../../contexts/authContext";
 
 const textOptions = ["CORDAS", "MADEIRAS", "METAIS", "PERCUSSAO"];
 
@@ -125,11 +124,11 @@ const UserOptions = styled.div`
 `;
 
 const Header = () => {
-  const handleLogout = () => {
-    authenticStore.logout();
-  };
+  const { user, logout } = useAuth();
 
-  const { user } = authenticStore;
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <HeaderContainer>
@@ -142,6 +141,7 @@ const Header = () => {
             <Link
               to={`${text.toLowerCase().split(" ").join("")}`}
               style={{ textDecoration: "none" }}
+              key={text}
             >
               <Option>
                 <TextOption>{text}</TextOption>
@@ -154,7 +154,7 @@ const Header = () => {
         <Link to="/dashboard">
           <UserLogo src={userLogo} alt="USER-LOGO" />
         </Link>
-        {authenticStore.isAuthentic ? (
+        {user ? (
           <UserOptions>
             <p>Bem vindo {user.name}!</p>
             <StyledLink href="/" onClick={handleLogout}>

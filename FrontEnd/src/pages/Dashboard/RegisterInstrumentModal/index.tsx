@@ -12,8 +12,8 @@ import styled from "styled-components";
 import { TitledInput } from "../../../components/TitledInput";
 import { useState } from "react";
 import { Button } from "../../../components/Button";
-import { authenticStore } from "../../../stores/authentic.store";
 import { usePost } from "../../../services/usePost";
+import { useAuth } from "../../../contexts/authContext";
 
 const CustomizedBox = styled(Box)`
   position: fixed;
@@ -72,7 +72,7 @@ export default function RegisterInstrumentModal({
   handleClose: () => void;
 }) {
   const { registerData } = usePost();
-  const { user } = authenticStore;
+  const { user } = useAuth();
 
   const [name, setName] = useState("");
   const [family, setFamily] = useState("");
@@ -110,7 +110,7 @@ export default function RegisterInstrumentModal({
 
     console.log(imgURL);
 
-    const userEmail = user.email;
+    const userEmail = user?.email;
 
     await registerData({
       url: "instrument/create",
@@ -122,10 +122,12 @@ export default function RegisterInstrumentModal({
         filename: imgURL,
         userEmail,
       },
-      token: user.token,
+      token: user?.acesstoken,
     });
 
     handleClose();
+
+    //Adicionar na lista de instrumentos do usuario na hora
   };
 
   return (
