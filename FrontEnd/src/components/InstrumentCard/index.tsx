@@ -24,8 +24,8 @@ const Title = styled.h3`
 const Image = styled.img`
   max-width: 100%;
   overflow: hidden;
-  border: 10px solid #eaf0ff;
-  border-radius: 50%;
+  border: 8px solid #eaf0ff;
+  border-radius: 90%;
   width: 10em;
 `;
 

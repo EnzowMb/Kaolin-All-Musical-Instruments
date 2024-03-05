@@ -2,13 +2,12 @@ import logo from "./assets/Logo.png";
 import userLogo from "./assets/User-Logo.png";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { authenticStore } from "../../stores/authentic.store";
 import { useAuth } from "../../contexts/authContext";
 
 const textOptions = ["CORDAS", "MADEIRAS", "METAIS", "PERCUSSAO"];
 
 const HeaderContainer = styled.header`
-  background-color: var(--Khaki);
+  background-color: var(--cor-principal);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -99,7 +98,7 @@ const StyledButton = styled.a`
 `;
 
 const UserLogo = styled.img`
-  width: 220px;
+  width: 14rem;
   transition: transform 0.3s;
   &:hover {
     transform: scale(1.025);

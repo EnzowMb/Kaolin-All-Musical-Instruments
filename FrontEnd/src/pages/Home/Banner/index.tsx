@@ -1,16 +1,8 @@
 import styled from "styled-components";
-import banner from "./banner.jpg";
 
 const BannerArea = styled.section`
   height: 50vh;
-  background: linear-gradient(
-      rgba(240, 240, 240, 0.144),
-      rgba(255, 255, 255, 0.336)
-    ),
-    url(${banner});
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  background: linear-gradient(var(--cor-principal), rgba(255, 255, 255, 0.336));
 `;
 
 const Container = styled.div`
@@ -25,6 +17,7 @@ const Container = styled.div`
 const Title = styled.h1`
   text-transform: uppercase;
   margin: 0;
+  font-size: 4rem;
 `;
 
 export const Banner = () => {

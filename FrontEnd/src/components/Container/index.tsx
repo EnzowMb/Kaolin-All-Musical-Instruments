@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-  background-color: var(--Khaki);
-  margin: 4em;
-  border-radius: 16px;
+  background-color: var(--cor-principal);
   padding: 2em;
   height: 100%;
 `;

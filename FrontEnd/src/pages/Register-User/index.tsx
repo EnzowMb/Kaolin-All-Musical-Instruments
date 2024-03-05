@@ -66,6 +66,11 @@ export const RegisterUser: React.FC = () => {
       return;
     }
 
+    if (!isNameValid(formData.name)) {
+      alert("Por favor, insira um nome válido.");
+      return;
+    }
+
     setActiveStage(activeStage + 1);
   };
 
@@ -75,6 +80,11 @@ export const RegisterUser: React.FC = () => {
       ...formData,
       [name]: value,
     });
+  };
+
+  const isNameValid = (email: string) => {
+    const nameRegex = /^[A-Z0-9._%+-]{4,20}$/;
+    return nameRegex.test(email);
   };
 
   const isEmailValid = (email: string) => {

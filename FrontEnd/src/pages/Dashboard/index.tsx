@@ -16,6 +16,7 @@ const UserContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: auto 4rem;
 `;
 
 const CustomizedButton = styled(Button)`
@@ -94,29 +95,6 @@ export const Dashboard = () => {
 
   return (
     <UserContainer>
-      <Title>Seus instrumentos</Title>
-      <CardEdit>
-        {user &&
-          user.instruments.map((instrument) => (
-            <React.Fragment key={instrument.id}>
-              <InstrumentCard
-                name={instrument.name}
-                family={instrument.family}
-                date={instrument.date}
-                description={instrument.description}
-                img={instrument.img}
-              />
-              <CustomizedButton
-                onClick={() => handleDelete(instrument.id)}
-                label="Excluir"
-              />
-              <CustomizedButton
-                onClick={() => handleOpenEditInstrument(instrument)}
-                label="Editar"
-              />
-            </React.Fragment>
-          ))}
-      </CardEdit>
       <Title>Perfil do Usuario!</Title>
       <CustomizedButton
         onClick={() => handleOpenEditUser()}
@@ -136,6 +114,36 @@ export const Dashboard = () => {
         handleClose={handleCloseEditInstrument}
         instrument={instrumentEdit}
       />
+
+      {user?.instruments.length !== 0 ? (
+        <>
+          <Title>Seus instrumentos</Title>
+          <CardEdit>
+            {user &&
+              user.instruments.map((instrument) => (
+                <React.Fragment key={instrument.id}>
+                  <InstrumentCard
+                    name={instrument.name}
+                    family={instrument.family}
+                    date={instrument.date}
+                    description={instrument.description}
+                    img={instrument.img}
+                  />
+                  <CustomizedButton
+                    onClick={() => handleDelete(instrument.id)}
+                    label="Excluir"
+                  />
+                  <CustomizedButton
+                    onClick={() => handleOpenEditInstrument(instrument)}
+                    label="Editar"
+                  />
+                </React.Fragment>
+              ))}
+          </CardEdit>
+        </>
+      ) : (
+        <Title>Nenhum instrumento cadastrado para este usuario</Title>
+      )}
     </UserContainer>
   );
 };

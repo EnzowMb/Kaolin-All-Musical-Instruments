@@ -1,15 +1,17 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getStorage } from 'firebase/storage';
+import { config } from 'dotenv';
+config();
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBPTdN8elt0TtIFBFOZGFtossiLHafhsp4',
-  authDomain: 'kaolin-all-instruments.firebaseapp.com',
-  projectId: 'kaolin-all-instruments',
-  storageBucket: 'kaolin-all-instruments.appspot.com',
-  messagingSenderId: '690178895692',
-  appId: '1:690178895692:web:aa2660a0eee8c5c6bce9e9',
-  measurementId: 'G-LLL9FR24HD',
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID,
 };
 
 // Initialize Firebase application

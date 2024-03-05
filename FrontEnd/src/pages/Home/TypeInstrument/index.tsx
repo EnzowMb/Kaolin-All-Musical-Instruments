@@ -25,11 +25,14 @@ const Text = styled.p`
   line-height: 19px;
   color: var(--SaddleBrown);
   padding: 0.5em 0.5em;
+  border-width: 0.5px;
+  border-style: solid;
+  border-color: white;
   border-radius: 1em;
   background-color: white;
   &:hover {
     color: black;
-    border: 0.5px solid black;
+    border-color: black;
   }
 `;
 

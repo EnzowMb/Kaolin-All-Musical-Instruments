@@ -1,5 +1,5 @@
 .elements {
-  padding-top: 10px;
+  padding: 1em;
   display: flex;
   flex-direction: column;
   gap: 30px;

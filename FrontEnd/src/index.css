@@ -1,24 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
+
 :root {
+  --fonte-principal: "Manrope", sans-serif;
+
+  font-family: var(--fonte-principal);
+
+  --cor-principal: #f0e68c;
   --SaddleBrown: #8b4513;
-  --Khaki: #f0e68c;
   --HoneyDew: #f0fff0;
   --PaleGoldenrod: #eee8aa;
   --MistyRose: #ffe4e1;
   --Thistle: #d8bfd8;
   --gray: #e7ebef;
-  --Main-Font: "Public Sans", sans-serif;
+
+  --background-theme: rgba(117, 120, 92, 0.831);
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }

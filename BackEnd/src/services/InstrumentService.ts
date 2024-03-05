@@ -1,7 +1,6 @@
 import { EfamilyInstrument } from '../model/EfamilyInstrument';
 import { Instrument } from '../model/InstrumentModel';
 import { instrumentRepository } from '../repositories/InstrumentRepository';
-import fs from 'fs';
 
 export class InstrumentService {
   createInstrument = async (instrument: Instrument) => {

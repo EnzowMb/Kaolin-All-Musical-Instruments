@@ -2,8 +2,16 @@ import { useEffect, useState } from "react";
 import { getInstruments } from "../../services/instrumentService";
 import { Instrument } from "../type";
 import { InstrumentCard } from "../../components/InstrumentCard";
+import styled from "styled-components";
 
 export const String = () => {
+  const Instruments = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em;
+  `;
+
   const [instruments, setInstruments] = useState<Instrument[]>([]);
 
   async function fetchInstruments() {
@@ -16,7 +24,7 @@ export const String = () => {
   }, []);
 
   return (
-    <div>
+    <Instruments>
       {instruments.map((instrument) => (
         <InstrumentCard
           key={instrument.id}
@@ -27,6 +35,6 @@ export const String = () => {
           img={instrument.img}
         />
       ))}
-    </div>
+    </Instruments>
   );
 };

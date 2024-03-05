@@ -127,7 +127,7 @@ export default function RegisterInstrumentModal({
 
     handleClose();
 
-    //Adicionar na lista de instrumentos do usuario na hora
+    //Editar os dados do usuario no localstorage
   };
 
   return (
