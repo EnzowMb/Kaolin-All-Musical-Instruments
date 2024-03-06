@@ -74,7 +74,7 @@ export default function EditInstrumentModal({
   handleClose: () => void;
   instrument: Instrument;
 }) {
-  const { user } = useAuth();
+  const { user, updateInstrument } = useAuth();
   const { updateData } = usePut();
 
   const convertDateFormat = (inputDate: string) => {
@@ -110,6 +110,8 @@ export default function EditInstrumentModal({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    console.log("opa " + JSON.stringify(instrument));
+
     if (
       formData.name === "" ||
       formData.family === "none" ||
@@ -131,6 +133,7 @@ export default function EditInstrumentModal({
       alert("Por favor, insira um data valida!.");
       return;
     }
+
     setFormData({
       name: formData.name,
       family: formData.family,
@@ -138,15 +141,20 @@ export default function EditInstrumentModal({
       userEmail: formData.userEmail,
     });
 
-    await updateData({
+    console.log(formData);
+
+    const response = await updateData({
       url: `instrument/${instrument.id}`,
       data: formData,
       token: user?.acesstoken,
     });
 
-    handleClose();
+    console.log(response?.data);
 
-    //Editar os dados do usuario no localstorage
+    if (response?.status === 202) {
+      handleClose();
+      updateInstrument(instrument.id, response.data);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

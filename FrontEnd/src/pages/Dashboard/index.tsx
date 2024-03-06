@@ -51,7 +51,7 @@ export const Dashboard = () => {
     userEmail: "",
   });
 
-  const { user, loading } = useAuth();
+  const { user, loading, deleteInstrument } = useAuth();
 
   const { deleteData } = useDelete();
 
@@ -73,7 +73,7 @@ export const Dashboard = () => {
 
   const handleOpenEditInstrument = (instrument: Instrument) => {
     setInstrumentEdit(instrument);
-    console.log(instrument.name);
+    console.log(instrument);
     setOpenModalEditInstrument(true);
   };
 
@@ -84,11 +84,16 @@ export const Dashboard = () => {
   const handleDelete = async (id: string) => {
     alert("Are you sure you want to delete");
 
-    if (user)
-      await deleteData({
+    if (user) {
+      const response = await deleteData({
         url: `instrument/${id}`,
         token: user.acesstoken,
       });
+      console.log(id);
+      if (response?.status === 204) {
+        deleteInstrument(id);
+      }
+    }
   };
 
   if (loading) return <></>;
@@ -104,10 +109,12 @@ export const Dashboard = () => {
         onClick={() => handleOpenRegister()}
         label="Adicionar Instrumento"
       />
-      <RegisterModal
-        open={openModalRegister}
-        handleClose={handleCloseRegister}
-      />
+      <React.Suspense fallback={"Carregando..."}>
+        <RegisterModal
+          open={openModalRegister}
+          handleClose={handleCloseRegister}
+        />
+      </React.Suspense>
       <EditModal open={openModalEditUser} handleClose={handleCloseEditUser} />
       <EditInstrumentModal
         open={openModalEditInstrument}
@@ -120,8 +127,8 @@ export const Dashboard = () => {
           <Title>Seus instrumentos</Title>
           <CardEdit>
             {user &&
-              user.instruments.map((instrument) => (
-                <React.Fragment key={instrument.id}>
+              user.instruments.map((instrument, index) => (
+                <React.Fragment key={index}>
                   <InstrumentCard
                     name={instrument.name}
                     family={instrument.family}

@@ -22,8 +22,7 @@ export function usePut() {
         },
       });
       setSucess(true);
-      const convertedResponse = await response.data.json();
-      setResponse(convertedResponse.acessToken);
+      return response;
     } catch (error) {
       setError("Não foi possível enviar os dados");
     }

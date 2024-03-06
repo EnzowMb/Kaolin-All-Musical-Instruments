@@ -72,8 +72,6 @@ export default function EditUserModal({
     });
 
     handleClose();
-
-    //Editar os dados do usuario no localstorage
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

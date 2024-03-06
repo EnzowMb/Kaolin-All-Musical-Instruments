@@ -14,8 +14,7 @@ export function useDelete() {
         },
       });
       setSucess(true);
-      const convertedResponse = await response.data.json();
-      setResponse(convertedResponse.acessToken);
+      return response;
     } catch (error) {
       setError("Não foi possível deletar os dados");
     }

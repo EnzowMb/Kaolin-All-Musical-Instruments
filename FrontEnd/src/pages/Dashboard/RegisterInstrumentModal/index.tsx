@@ -14,6 +14,8 @@ import { useState } from "react";
 import { Button } from "../../../components/Button";
 import { usePost } from "../../../services/usePost";
 import { useAuth } from "../../../contexts/authContext";
+import { Instrument } from "../../type";
+import axios from "axios";
 
 const CustomizedBox = styled(Box)`
   position: fixed;
@@ -71,8 +73,8 @@ export default function RegisterInstrumentModal({
   open: boolean;
   handleClose: () => void;
 }) {
-  const { registerData } = usePost();
-  const { user } = useAuth();
+  const { registerData, response } = usePost();
+  const { user, createInstrument } = useAuth();
 
   const [name, setName] = useState("");
   const [family, setFamily] = useState("");
@@ -112,7 +114,7 @@ export default function RegisterInstrumentModal({
 
     const userEmail = user?.email;
 
-    await registerData({
+    const response = await registerData({
       url: "instrument/create",
       data: {
         name,
@@ -125,9 +127,11 @@ export default function RegisterInstrumentModal({
       token: user?.acesstoken,
     });
 
-    handleClose();
+    if (response) {
+      handleClose();
 
-    //Editar os dados do usuario no localstorage
+      if (response.status === 201) createInstrument(response.data);
+    }
   };
 
   return (

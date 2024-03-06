@@ -99,7 +99,7 @@ export class InstrumentController {
         instrumentModel
       );
 
-      return res.status(200).json(updatedInstrument);
+      return res.status(202).json(updatedInstrument);
     } catch (error: any) {
       return res.json(error);
     }

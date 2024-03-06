@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { Instrument } from "../pages/type";
 
 export function usePost() {
   const [error, setError] = useState("");
@@ -31,7 +32,7 @@ export function usePost() {
         }
       }
 
-      const response = await axios.post(
+      const response = await axios.post<Instrument>(
         `http://localhost:8000/${url}`,
         formData,
         {
@@ -41,8 +42,7 @@ export function usePost() {
         }
       );
       setSucess(true);
-      const convertedResponse = await response.data.json();
-      setResponse(convertedResponse.acessToken);
+      return response;
     } catch (error) {
       setError("Não foi possível enviar os dados");
     }

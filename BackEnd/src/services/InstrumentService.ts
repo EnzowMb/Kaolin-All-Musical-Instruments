@@ -18,7 +18,7 @@ export class InstrumentService {
         },
       },
       select: {
-        id: false,
+        id: true,
         name: true,
         family: true,
         date: true,
