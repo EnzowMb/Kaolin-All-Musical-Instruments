@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Title } from "../../../components/Title";
 import { TitledInput } from "../../../components/TitledInput";
 import { useState } from "react";
-import { authenticStore } from "../../../stores/authentic.store";
 import { Button } from "../../../components/Button";
 import { usePut } from "../../../services/usePut";
 import { useAuth } from "../../../contexts/authContext";
@@ -36,7 +35,7 @@ export default function EditUserModal({
   open: boolean;
   handleClose: () => void;
 }) {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
   const { updateData } = usePut();
   if (!user) return <></>;
 
@@ -65,13 +64,17 @@ export default function EditUserModal({
       return;
     }
 
-    await updateData({
+    const response = await updateData({
       url: `user/${user.id}`,
       data: formData,
       token: user.acesstoken,
     });
 
-    handleClose();
+    if (response?.status === 202) {
+      handleClose();
+      updateUser(user.id, response.data);
+      console.log(response.data);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -149,8 +149,6 @@ export default function EditInstrumentModal({
       token: user?.acesstoken,
     });
 
-    console.log(response?.data);
-
     if (response?.status === 202) {
       handleClose();
       updateInstrument(instrument.id, response.data);

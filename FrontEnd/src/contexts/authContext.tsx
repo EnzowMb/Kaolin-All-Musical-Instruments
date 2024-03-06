@@ -16,6 +16,7 @@ type AuthContextProps = {
   createInstrument: (data: Instrument) => Promise<void>;
   updateInstrument: (id: string, data: Instrument) => Promise<void>;
   deleteInstrument: (id: string) => Promise<void>;
+  updateUser: (id: string, data: IUsuario) => Promise<void>;
 };
 
 const defaultValues: AuthContextProps = {
@@ -26,6 +27,7 @@ const defaultValues: AuthContextProps = {
   createInstrument: async () => {},
   updateInstrument: async () => {},
   deleteInstrument: async () => {},
+  updateUser: async () => {},
 };
 
 const AuthContext = createContext(defaultValues);
@@ -121,6 +123,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
+  const updateUser = async (id: string, data: IUsuario) => {
+    if (user) {
+      setUser({ ...user, name: data.name, email: data.email });
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ ...user, name: data.name, email: data.email })
+      );
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -131,6 +143,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         createInstrument,
         updateInstrument,
         deleteInstrument,
+        updateUser,
       }}
     >
       {children}

@@ -56,7 +56,7 @@ export class UserController {
       });
       const userModel = new User(name, email, password);
       const user = await this.userService.updateUser(userModel, id);
-      return res.status(201).json(user);
+      return res.status(202).json(user);
     } catch (error: any) {
       return res.json(error);
     }
