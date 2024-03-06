@@ -5,7 +5,7 @@ import { getAllInstruments } from "../../services/instrumentService";
 import { InstrumentCard } from "../../components/InstrumentCard";
 import { Banner } from "./Banner";
 import styled from "styled-components";
-import { Seacrh } from "./Search";
+import { Search } from "./Search";
 import { TypeInstrument } from "./TypeInstrument";
 
 const Container = styled.div`
@@ -31,7 +31,7 @@ export function Home() {
       <Banner />
       <div className="elements">
         <Container>
-          <Seacrh />
+          <Search />
           <TypeInstrument />
         </Container>
         {instruments.map((instrument) => (

@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useState } from "react";
+
 import search from "./assets/search.png";
 import { Button } from "../../../components/Button";
 
@@ -43,12 +45,19 @@ const Title = styled.h2`
   color: black;
 `;
 
-export function Seacrh() {
+export function Search() {
+  const [search, setSearch] = useState("");
+
   return (
     <Container>
       <Title>Procure seu instrumento favorito!</Title>
       <ContainerForm>
-        <Input placeholder={"Digite o instrumento que você procura!"} />
+        <Input
+          type="text"
+          onChange={(ev) => setSearch(ev.target.value)}
+          value={search}
+          placeholder={"Digite o instrumento que você procura!"}
+        />
         <Button label="Buscar" />
       </ContainerForm>
     </Container>
