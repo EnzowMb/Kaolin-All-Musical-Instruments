@@ -20,8 +20,6 @@ export class InstrumentController {
 
       const dateTime = giveCurrentDateTime();
 
-      console.log(req.file);
-
       const storageRef = ref(
         storage,
         `files/${req.file?.originalname + '  ' + dateTime}`
@@ -111,8 +109,6 @@ export class InstrumentController {
 
       await this.instrumentService.deleteInstrument(id);
 
-      console.log('opa');
-
       res.status(204).send({ message: 'Instrumento deletado com sucesso!' });
     } catch (error: any) {
       return res.json(error);
@@ -140,9 +136,6 @@ export class InstrumentController {
 
       limit = parseInt(limit as string, 10);
       page = parseInt(page as string, 10);
-
-      console.log((req as any).usuarioEmail);
-      console.log((req as any).usuarioName);
 
       EfamilyInstrument[string as keyof typeof EfamilyInstrument];
 

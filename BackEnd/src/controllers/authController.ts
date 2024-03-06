@@ -17,8 +17,6 @@ export class AuthController {
 
       const login = await this.authService.login({ email, password });
 
-      console.log(login);
-
       if (login) {
         return res.status(200).json({
           acesstoken: login.acessToken,

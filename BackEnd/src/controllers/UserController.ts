@@ -20,7 +20,6 @@ export class UserController {
       });
       const userModel = new User(name, email, password);
       const newUser = await this.userService.createUser(userModel);
-      console.log(newUser);
       return res.status(201).json(newUser);
     } catch (error: any) {
       return res.json(error);
