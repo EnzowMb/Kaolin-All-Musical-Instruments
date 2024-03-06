@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import whatsapp from "./assets/whatsapp.png";
+import linkedin from "./assets/linkedin.png";
 import instagram from "./assets/instagram.png";
-import google from "./assets/google.png";
-import facebook from "./assets/facebook.png";
 
 const StyledFooter = styled.footer`
+  display: flex;
+  flex-direction: column;
   height: 100%;
   color: white;
   padding: 1em;
@@ -12,46 +12,52 @@ const StyledFooter = styled.footer`
   text-align: center;
 `;
 
-const StyledList = styled.ul`
+const StyledSocialMedia = styled.div`
   display: flex;
-  justify-content: space-around;
-  width: 10%;
-  margin: 1em auto;
+  justify-content: center;
+  width: 50%;
+  margin: 0.5em auto;
+`;
+
+const StyledTextArea = styled.div`
+  text-align: center;
 `;
 
 const StyledItem = styled.li`
   list-style-type: none;
+  padding: 0.5rem;
 `;
 
 export const Footer = () => {
   return (
     <StyledFooter>
-      <StyledList>
+      <StyledSocialMedia>
         <StyledItem>
-          <a href=".">
-            <img src={facebook} alt="logo do facebook" />
+          <a
+            href="https://www.linkedin.com/in/enzo-martinelli-brunozi-404b23229/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src={linkedin} alt="logo do whatsapp" />
           </a>
         </StyledItem>
         <StyledItem>
-          <a href=".">
-            <img src={whatsapp} alt="logo do whatsapp" />
-          </a>
-        </StyledItem>
-        <StyledItem>
-          <a href=".">
-            <img src={google} alt="logo do google" />
-          </a>
-        </StyledItem>
-        <StyledItem>
-          <a href=".">
+          <a
+            href="https://www.instagram.com/enzow.mb/"
+            target="_blank"
+            rel="noreferrer"
+          >
             <img src={instagram} alt="logo do instagram" />
           </a>
         </StyledItem>
-      </StyledList>
-      <p>
-        2023 © Desenvolvido por Enzo Martinelli Brunozi | Projeto fictício sem
-        fins comerciais.
-      </p>
+      </StyledSocialMedia>
+      <StyledTextArea>
+        <p>
+          2023 © Desenvolvido por Enzo Martinelli Brunozi | Projeto fictício sem
+          fins comerciais.
+        </p>
+        <p>Espero que goste :D</p>
+      </StyledTextArea>
     </StyledFooter>
   );
 };
