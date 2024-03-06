@@ -1,10 +1,11 @@
 import express from 'express';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJson from './swagger.json';
+import cors from 'cors';
+
 import { instrumentRoute } from './routes/InstrumentRoute';
 import { userRoute } from './routes/UserRoute';
 import { loginRoute } from './routes/LoginRoute';
-import cors from 'cors';
 
 const app = express();
 const port = 8000;

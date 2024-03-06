@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+
 import { AuthService } from '../services/authService';
 import { LoginType, Validation } from '../services/Validation';
 
@@ -26,7 +27,9 @@ export class AuthController {
           instruments: login.user.instruments,
         });
       } else {
-        return res.status(400).send({ message: 'Invalid User or Password' });
+        return res
+          .status(400)
+          .send({ message: 'Usuario ou senha incorretos!' });
       }
     } catch (error) {
       return res.json(error);

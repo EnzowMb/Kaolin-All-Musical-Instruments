@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { jsonSecret } from '../jsonSecret';
 import { decode, verify } from 'jsonwebtoken';
+
+import { jsonSecret } from '../jsonSecret';
 import { UserType } from '../services/Validation';
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {

@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+
 import { UserService } from '../services/UserService';
 import { UserType, Validation } from '../services/Validation';
 import { User } from '../model/UserModel';

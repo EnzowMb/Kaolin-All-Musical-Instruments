@@ -1,8 +1,9 @@
 import { hash } from 'bcrypt';
+import { sign } from 'jsonwebtoken';
+
 import { User } from '../model/UserModel';
 import { jsonSecret } from '../jsonSecret';
 import { userRepository } from '../repositories/UserRepository';
-import { sign } from 'jsonwebtoken';
 
 export class UserService {
   findByEmailAndPassword = (email: string, password: string) => {

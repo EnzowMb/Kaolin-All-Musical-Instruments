@@ -1,7 +1,8 @@
 import { sign } from 'jsonwebtoken';
+import { compare } from 'bcrypt';
+
 import { jsonSecret } from '../jsonSecret';
 import { userRepository } from '../repositories/UserRepository';
-import { compare } from 'bcrypt';
 import { LoginType } from './Validation';
 
 export class AuthService {

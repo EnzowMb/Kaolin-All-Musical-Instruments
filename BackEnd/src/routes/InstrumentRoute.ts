@@ -1,7 +1,8 @@
 import { Router } from 'express';
+import multer from 'multer';
+
 import { InstrumentController } from '../controllers/InstrumentController';
 import { auth } from '../middlewares/auth';
-import multer from 'multer';
 
 const router = Router();
 const instrumentController = new InstrumentController();
