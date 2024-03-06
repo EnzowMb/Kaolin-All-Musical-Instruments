@@ -143,7 +143,7 @@ export class InstrumentController {
       if (
         !Object.keys(EfamilyInstrument).includes(string as EfamilyInstrument)
       ) {
-        return res.status(401).send({ message: 'Category not found' });
+        return res.status(401).send({ message: 'Categoria não encontrada' });
       }
 
       if (string !== null) {
