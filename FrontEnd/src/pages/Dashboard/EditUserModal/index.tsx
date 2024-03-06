@@ -72,8 +72,8 @@ export default function EditUserModal({
 
     if (response?.status === 202) {
       handleClose();
+      setIsInputEnabled(!isInputEnabled);
       updateUser(user.id, response.data);
-      console.log(response.data);
     }
   };
 

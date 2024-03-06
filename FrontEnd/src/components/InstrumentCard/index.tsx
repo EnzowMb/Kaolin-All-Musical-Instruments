@@ -4,7 +4,7 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--PaleGoldenrod);
+  background-color: var(--card-color);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   margin: 0.5em auto;
@@ -24,8 +24,8 @@ const Title = styled.h3`
 const Image = styled.img`
   max-width: 100%;
   overflow: hidden;
-  border: 8px solid #eaf0ff;
-  border-radius: 90%;
+  border: 7px solid var(--PaleGoldenrod);
+  border-radius: 20%;
   width: 10em;
 `;
 

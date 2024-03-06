@@ -25,16 +25,21 @@ const CustomizedButton = styled(Button)`
   border: 1px solid;
   margin: 1.5em;
   font-size: 1em;
-  padding: 2em;
+  padding: 1.5em;
 `;
 
 const CardEdit = styled.div`
   display: block;
-  background-image: linear-gradient(90deg, #e0c821 35%, #c6b832);
+  background-image: linear-gradient(
+    50deg,
+    var(--background-theme),
+    var(--cor-principal)
+  );
   padding: 1em;
   box-sizing: border-box;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
   border: 1px solid;
+  border-radius: 8px;
 `;
 
 export const Dashboard = () => {

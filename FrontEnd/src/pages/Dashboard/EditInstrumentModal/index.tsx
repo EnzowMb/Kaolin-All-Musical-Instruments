@@ -110,8 +110,6 @@ export default function EditInstrumentModal({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log("opa " + JSON.stringify(instrument));
-
     if (
       formData.name === "" ||
       formData.family === "none" ||
@@ -124,7 +122,6 @@ export default function EditInstrumentModal({
 
     const parts = formData.date.split("-");
     const formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
-    console.log(formattedDate);
     formData.date = formattedDate;
 
     if (
@@ -141,8 +138,6 @@ export default function EditInstrumentModal({
       userEmail: formData.userEmail,
     });
 
-    console.log(formData);
-
     const response = await updateData({
       url: `instrument/${instrument.id}`,
       data: formData,
@@ -151,6 +146,7 @@ export default function EditInstrumentModal({
 
     if (response?.status === 202) {
       handleClose();
+      setIsInputEnabled(!isInputEnabled);
       updateInstrument(instrument.id, response.data);
     }
   };
