@@ -1,5 +1,4 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { authenticStore } from "../stores/authentic.store";
 import { useAuth } from "../contexts/authContext";
 
 export const PrivateRoute = () => {

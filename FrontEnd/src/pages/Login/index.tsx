@@ -4,7 +4,6 @@ import { Button } from "../../components/Button";
 import axios from "axios";
 import styled from "styled-components";
 import logo from "../../Img/Logo.png";
-import { authenticStore } from "../../stores/authentic.store";
 import { TitledInput } from "../../components/TitledInput";
 import { useAuth } from "../../contexts/authContext";
 

@@ -109,7 +109,9 @@ export default function EditUserModal({
             onChange={handleChange}
             disabled={!isInputEnabled}
             style={{
-              border: isInputEnabled ? "none" : "2px solid var(--SaddleBrown)",
+              border: isInputEnabled
+                ? "none"
+                : "2px solid var(--cor-secundaria)",
               color: isInputEnabled ? "black" : "gray",
             }}
             required
@@ -123,7 +125,9 @@ export default function EditUserModal({
             onChange={handleChange}
             disabled={!isInputEnabled}
             style={{
-              border: isInputEnabled ? "none" : "2px solid var(--SaddleBrown)",
+              border: isInputEnabled
+                ? "none"
+                : "2px solid var(--cor-secundaria)",
               color: isInputEnabled ? "black" : "gray",
             }}
             required
@@ -137,7 +141,9 @@ export default function EditUserModal({
             onChange={handleChange}
             disabled={!isInputEnabled}
             style={{
-              border: isInputEnabled ? "none" : "2px solid var(--SaddleBrown)",
+              border: isInputEnabled
+                ? "none"
+                : "2px solid var(--cor-secundaria)",
               color: isInputEnabled ? "black" : "gray",
             }}
             required

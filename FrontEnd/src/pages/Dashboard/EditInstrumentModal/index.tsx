@@ -190,7 +190,9 @@ export default function EditInstrumentModal({
             onChange={handleChange}
             disabled={!isInputEnabled}
             style={{
-              border: isInputEnabled ? "none" : "2px solid var(--SaddleBrown)",
+              border: isInputEnabled
+                ? "none"
+                : "2px solid var(--cor-secundaria)",
               color: isInputEnabled ? "black" : "gray",
             }}
             required
@@ -208,7 +210,7 @@ export default function EditInstrumentModal({
               style={{
                 border: isInputEnabled
                   ? "none"
-                  : "2px solid var(--SaddleBrown)",
+                  : "2px solid var(--cor-secundaria)",
                 color: isInputEnabled ? "black" : "gray",
               }}
               disabled={!isInputEnabled}
@@ -232,7 +234,9 @@ export default function EditInstrumentModal({
             onChange={handleChange}
             disabled={!isInputEnabled}
             style={{
-              border: isInputEnabled ? "none" : "2px solid var(--SaddleBrown)",
+              border: isInputEnabled
+                ? "none"
+                : "2px solid var(--cor-secundaria)",
               color: isInputEnabled ? "black" : "gray",
             }}
             required

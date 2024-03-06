@@ -23,7 +23,7 @@ const Section = styled.div`
 
 const Text = styled.p`
   line-height: 19px;
-  color: var(--SaddleBrown);
+  color: var(--cor-secundaria);
   padding: 0.5em 0.5em;
   border-width: 0.5px;
   border-style: solid;

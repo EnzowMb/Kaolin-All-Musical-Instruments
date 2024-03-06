@@ -48,7 +48,7 @@ const Option = styled.li`
     display: block;
     width: 0;
     height: 2px;
-    background: var(--SaddleBrown);
+    background: var(--cor-secundaria);
     transition: width 0.3s;
   }
   &:hover {
@@ -78,7 +78,7 @@ const StyledLink = styled.a`
   text-decoration: none;
   padding: 0.5em 1.5em;
   border-radius: 1em;
-  background-color: var(--SaddleBrown);
+  background-color: var(--cor-secundaria);
   &:hover {
     color: var(--MistyRose);
   }

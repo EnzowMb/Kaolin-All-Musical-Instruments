@@ -15,7 +15,7 @@ const Card = styled.div`
 `;
 
 const Title = styled.h3`
-  color: var(--SaddleBrown);
+  color: var(--cor-secundaria);
   font-weight: 700;
   font-size: 2em;
   text-align: center;
