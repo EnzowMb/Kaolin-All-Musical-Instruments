@@ -2,13 +2,16 @@ import express from 'express';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJson from './swagger.json';
 import cors from 'cors';
+import { config } from 'dotenv';
 
 import { instrumentRoute } from './routes/InstrumentRoute';
 import { userRoute } from './routes/UserRoute';
 import { loginRoute } from './routes/LoginRoute';
 
+config();
+
 const app = express();
-const port = 8000;
+const port = process.env.PORT;
 
 app.use(express.json());
 
