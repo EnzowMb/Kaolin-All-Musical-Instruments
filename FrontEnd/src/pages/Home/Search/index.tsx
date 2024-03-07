@@ -1,8 +1,12 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import search from "./assets/search.png";
 import { Button } from "../../../components/Button";
+import { getAllInstruments } from "../../../services/instrumentService";
+import { Instrument } from "../../type";
+import { InstrumentCard } from "../../../components/InstrumentCard";
+import { Subtitle } from "../../../components/SubTitle";
 
 const Input = styled.input`
   padding: 16px 16px 16px 30px;
@@ -37,16 +41,51 @@ const ContainerForm = styled.div`
 `;
 
 const Title = styled.h2`
-  font-family: var(--Main-Font);
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 1.15rem;
   line-height: 22px;
   color: black;
 `;
 
+const ButtonOK = styled(Button)`
+  margin-top: 1rem;
+`;
+
 export function Search() {
   const [search, setSearch] = useState("");
+
+  const [instruments, setInstruments] = useState<Instrument[]>([]);
+
+  const handleSearchClick = () => {
+    if (search === "") return;
+
+    setIsInputEnabled(true);
+  };
+
+  const handleOKClick = () => {
+    setIsInputEnabled(false);
+  };
+
+  const [isInputEnabled, setIsInputEnabled] = useState(false);
+
+  async function fetchInstruments() {
+    const instrumentsAPI = await getAllInstruments();
+    setInstruments(instrumentsAPI);
+  }
+
+  useEffect(() => {
+    fetchInstruments();
+  }, []);
+
+  const instrumentFilter =
+    search !== ""
+      ? instruments.filter((instrumento) =>
+          instrumento.name.toLowerCase().startsWith(search.toLowerCase())
+        )
+      : [];
+
+  console.log(instrumentFilter.length);
 
   return (
     <Container>
@@ -58,8 +97,26 @@ export function Search() {
           value={search}
           placeholder={"Digite o instrumento que você procura!"}
         />
-        <Button label="Buscar" />
+        <Button type="button" label="Buscar" onClick={handleSearchClick} />
       </ContainerForm>
+      {isInputEnabled && (
+        <>
+          {instrumentFilter.map((instrument) => (
+            <InstrumentCard
+              key={instrument.id}
+              name={instrument.name}
+              family={instrument.family}
+              date={instrument.date}
+              description={instrument.description}
+              img={instrument.img}
+            />
+          ))}
+          {instrumentFilter.length === 0 && (
+            <Subtitle>Nenhum instrumento encontado :(</Subtitle>
+          )}
+          <ButtonOK type="button" label="OK" onClick={handleOKClick} />
+        </>
+      )}
     </Container>
   );
 }

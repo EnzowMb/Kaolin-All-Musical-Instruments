@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Subtitle = styled.h3`
-  color: var(--Khaki);
+  color: var(--cor-secundaria);
   font-weight: 700;
-  font-size: 18px;
+  font-size: 1rem;
 `;
