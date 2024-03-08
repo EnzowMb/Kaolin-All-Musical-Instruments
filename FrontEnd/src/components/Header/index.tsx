@@ -1,10 +1,34 @@
+import styled from "styled-components";
+import { DownOutlined } from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import { Dropdown, Space } from "antd";
+import { isMobile } from "react-device-detect";
+
 import logo from "./assets/Logo.png";
 import userLogo from "./assets/User-Logo.png";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { useAuth } from "../../contexts/authContext";
 
 const textOptions = ["CORDAS", "MADEIRAS", "METAIS", "PERCUSSAO"];
+
+const items: MenuProps["items"] = [
+  {
+    label: <a href="/cordas">Cordas</a>,
+    key: "0",
+  },
+  {
+    label: <a href="/madeiras">Madeiras</a>,
+    key: "1",
+  },
+  {
+    label: <a href="/madeiras">Metais</a>,
+    key: "2",
+  },
+  {
+    label: <a href="/madeiras">Percussão</a>,
+    key: "3",
+  },
+];
 
 const HeaderContainer = styled.header`
   background-color: var(--cor-principal);
@@ -12,12 +36,18 @@ const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 2em 2em;
+  @media (max-width: 700px) {
+    padding: 1em 1em;
+  }
 `;
 
 const LogoHeader = styled.img`
   width: 200px;
   border-radius: 2em;
   border: 2px solid black;
+  @media (max-width: 700px) {
+    width: 150px;
+  }
 `;
 
 const Container = styled.div`
@@ -97,6 +127,15 @@ const StyledButton = styled.a`
   }
 `;
 
+const ButtonArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+`;
+
 const UserLogo = styled.img`
   width: 14rem;
   transition: transform 0.3s;
@@ -120,6 +159,16 @@ const UserOptions = styled.div`
   padding: 1em 2em;
   border-radius: 2em;
   font-size: 1em;
+  @media (max-width: 700px) {
+    padding: 1rem;
+  }
+`;
+
+const DropdownStyled = styled(Dropdown)`
+  padding: 1rem;
+  background-color: var(--PaleGoldenrod);
+  border: 2px solid var(--cor-secundaria);
+  border-radius: 8px;
 `;
 
 const Header = () => {
@@ -129,44 +178,77 @@ const Header = () => {
     logout();
   };
 
+  console.log(isMobile);
+
   return (
     <HeaderContainer>
-      <Link to="/">
-        <LogoHeader src={logo} alt="logo Kaolin" />
-      </Link>
-      <Container>
-        <Options>
-          {textOptions.map((text) => (
-            <Link
-              to={`${text.toLowerCase().split(" ").join("")}`}
-              style={{ textDecoration: "none" }}
-              key={text}
-            >
-              <Option>
-                <TextOption>{text}</TextOption>
-              </Option>
+      {isMobile ? (
+        <>
+          <Link to="/">
+            <LogoHeader src={logo} alt="logo Kaolin" />
+          </Link>
+          <DropdownStyled menu={{ items }} trigger={["click"]}>
+            <a onClick={(e) => e.preventDefault()}>
+              <Space>
+                Instrumentos
+                <DownOutlined />
+              </Space>
+            </a>
+          </DropdownStyled>
+          {user ? (
+            <UserOptions>
+              <p>Bem vindo {user.name}!</p>
+              <StyledLink href="/" onClick={handleLogout}>
+                Sair
+              </StyledLink>
+            </UserOptions>
+          ) : (
+            <ButtonArea>
+              <StyledButton href="/login">Entrar</StyledButton>
+              <StyledButton href="/register-user">Cadastre-se</StyledButton>
+            </ButtonArea>
+          )}
+        </>
+      ) : (
+        <>
+          <Link to="/">
+            <LogoHeader src={logo} alt="logo Kaolin" />
+          </Link>
+          <Container>
+            <Options>
+              {textOptions.map((text) => (
+                <Link
+                  to={`${text.toLowerCase().split(" ").join("")}`}
+                  style={{ textDecoration: "none" }}
+                  key={text}
+                >
+                  <Option>
+                    <TextOption>{text}</TextOption>
+                  </Option>
+                </Link>
+              ))}
+            </Options>
+          </Container>
+          <UserContainer>
+            <Link to="/dashboard">
+              <UserLogo src={userLogo} alt="USER-LOGO" />
             </Link>
-          ))}
-        </Options>
-      </Container>
-      <UserContainer>
-        <Link to="/dashboard">
-          <UserLogo src={userLogo} alt="USER-LOGO" />
-        </Link>
-        {user ? (
-          <UserOptions>
-            <p>Bem vindo {user.name}!</p>
-            <StyledLink href="/" onClick={handleLogout}>
-              Sair
-            </StyledLink>
-          </UserOptions>
-        ) : (
-          <div>
-            <StyledButton href="/login">Entrar</StyledButton>
-            <StyledButton href="/register-user">Cadastre-se</StyledButton>
-          </div>
-        )}
-      </UserContainer>
+            {user ? (
+              <UserOptions>
+                <p>Bem vindo {user.name}!</p>
+                <StyledLink href="/" onClick={handleLogout}>
+                  Sair
+                </StyledLink>
+              </UserOptions>
+            ) : (
+              <div>
+                <StyledButton href="/login">Entrar</StyledButton>
+                <StyledButton href="/register-user">Cadastre-se</StyledButton>
+              </div>
+            )}
+          </UserContainer>
+        </>
+      )}
     </HeaderContainer>
   );
 };

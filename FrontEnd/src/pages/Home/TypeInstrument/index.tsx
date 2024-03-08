@@ -10,6 +10,9 @@ const Container = styled.section`
   justify-content: space-between;
   text-align: center;
   width: 60%;
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `;
 
 const Section = styled.div`
