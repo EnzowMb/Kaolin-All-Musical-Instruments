@@ -2,7 +2,7 @@ import axios from "axios";
 import { User } from "../pages/type";
 
 const userAPI = axios.create({
-  baseURL: "http://localhost:8000/user",
+  baseURL: "https://kaolin-all-instruments.uc.r.appspot.com/user",
 });
 
 async function getUser() {

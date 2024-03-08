@@ -14,8 +14,6 @@ import { useState } from "react";
 import { Button } from "../../../components/Button";
 import { usePost } from "../../../services/usePost";
 import { useAuth } from "../../../contexts/authContext";
-import { Instrument } from "../../type";
-import axios from "axios";
 
 const CustomizedBox = styled(Box)`
   position: fixed;

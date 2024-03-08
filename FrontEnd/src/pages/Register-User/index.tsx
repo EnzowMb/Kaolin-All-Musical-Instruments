@@ -116,7 +116,10 @@ export const RegisterUser: React.FC = () => {
     }
 
     axios
-      .post("http://localhost:8000/user/create", formData)
+      .post(
+        "https://kaolin-all-instruments.uc.r.appspot.com/user/create",
+        formData
+      )
       .then((response) => {
         console.log("Dados enviados com sucesso:", response.data);
         setShowSuccessModal(true);

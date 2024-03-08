@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const woodWindAPI = axios.create({
-  baseURL: "http://localhost:8000/instrument",
+  baseURL: "https://kaolin-all-instruments.uc.r.appspot.com/instrument",
 });
 
 async function getAllInstruments() {

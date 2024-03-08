@@ -33,7 +33,7 @@ export function usePost() {
       }
 
       const response = await axios.post<Instrument>(
-        `http://localhost:8000/${url}`,
+        `https://kaolin-all-instruments.uc.r.appspot.com/${url}`,
         formData,
         {
           headers: {

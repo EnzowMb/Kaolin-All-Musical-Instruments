@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button";
-import axios from "axios";
 import styled from "styled-components";
 import logo from "../../Img/Logo.png";
 import { TitledInput } from "../../components/TitledInput";

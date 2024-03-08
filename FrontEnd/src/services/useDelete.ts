@@ -8,11 +8,14 @@ export function useDelete() {
 
   async function deleteData({ url, token }: { url: string; token: string }) {
     try {
-      const response = await axios.delete(`http://localhost:8000/${url}`, {
-        headers: {
-          Authorization: `Basic ${token}`,
-        },
-      });
+      const response = await axios.delete(
+        `https://kaolin-all-instruments.uc.r.appspot.com/${url}`,
+        {
+          headers: {
+            Authorization: `Basic ${token}`,
+          },
+        }
+      );
       setSucess(true);
       return response;
     } catch (error) {
