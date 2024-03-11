@@ -3,3 +3,94 @@ Toda vez que mudar a config no prisma, o esquema do banco, é para dar yarn pris
 SERVER PARADO!!
 
 depois yarn prisma db pull
+
+Como não há convenção/padrão para o caso de uso aqui apresentado, acredito que qualquer resposta seja "opinativa" assim como quase todas as respostas apresentadas aqui na comunidade relativas ao uso de códigos de status para requisições HTTP ... deixo aqui meus 2 centavos sobre ela:
+
+400 Bad Request (porque não utilizá-lo)
+
+Normalmente utilizado para descrever uma solicitação inválida, indicando que a natureza deste erro é de origem do cliente.
+
+Embora a RFC 7231 estenda a definição proposta pela RFC 2616 para tornar o código de status 400 mais amplo e abrangente há toda e qualquer situação que o servidor possa entender não ser um erro dele mediante a requisição, acredito não ser o caso de uso para a questão aqui apresentada uma vez que estamos assumindo que o cliente não cometeu erro algum ao submeter as informação pretendidas para cadastro.
+
+200 OK
+
+Não acredito precisar entrar na definição mas de longe este é o queridinho das aplicações para tratar a questão levantada na pergunta.
+
+Usado por grandes e pequenas aplicação, a exemplo disto cito algumas que provavelmente sejam de conhecimento da maioria dos internautas:
+
+Gmail - realiza uma requisição POST assíncrona ao clicar no botão "próxima" após preencher os dados de cadastro para verificar a disponibilidade do email e retorna um status 200 com um objeto que descreve o resultado obtido.
+
+Twitter - realiza varias requisições POST assíncronas assim que o usuário insere dados nos campos de email ou telefone, retornando um status 200 com um objeto que descreve o resultado obtido.
+
+StackOverflow - vai "logar" caso o email e senha sejam os mesmos já cadastrados, caso a senha seja diferente ira renderizar uma página para recuperação no método GET retornando um status 200
+
+Facebook - renderiza uma pagina de recuperação com parâmetros no método GET retornando um status 200
+
+Acredito que o uso do código status 200 seja adequado dependendo da abordagem e particularmente acho que o Facebook o faz da melhor forma.
+
+PS: que fique claro, isso não é "puxa-saquismo" pela plataforma Facebook, eu nem tenho conta nesta rede.
+
+409 Conflict (porque não utilizar)
+
+A RFC 7231 indica que a solicitação não pôde ser concluída devido a um conflito com o estado atual do recurso de destino.
+
+Como apontado nos comentários da questão o recurso (resource) pode ser qualquer coisa no servidor por exemplo:
+
+um arquivo manipulável de qualquer formato disponível ou não publicamente
+
+uma referencia, valor ou estrutura presente apenas (alocado) no espaço de memória da aplicação
+
+um registro no banco de dados
+
+etc ...
+
+Essa definição realmente é muito ampla más em sua base é "implícito" o entendimento de que "o recurso existe(a) no servidor de destino", não há como haver "um conflito no estado" de um recurso que não exista (posso estar errado aqui mas estou aberto a uma definição qualificada).
+
+O intuito de um sistema de cadastro/registro de novos usuários em uma aplicação não é modificar "um registro que já exista", pelo contrário seu objetivo é criar uma nova referencia.
+
+Normalmente como parte da rotina verifica-se se um determinado índice (normalmente o email) já existe no registro más, esta verificação não tem por objetivo obter o registro para modificá-lo e por tanto, não vejo como "coerente" retornar um código de status 409.
+
+Um cenário plausível mas fora do escopo da pergunta seria retornar 409 em uma solicitação de atualização de uma informação previamente registrada como um email por exemplo. Caso um novo email seja igual ao antigo email seria indicado retornar 409 com uma carga útil que indique a razão/motivo do conflito.
+
+422 Unprocessable Entity (porque usá-lo)
+
+O código de status 422 foi implementado na RFC 4918 assim como outros (207, 423, 424, 507) para "estender" a lista padrão definida na RFC 2616 como afirmado na seção 11 - Extensões de Código de Status para HTTP/1.1
+
+Como citado nos comentários da questão o código 422 esta "relacionado" a WebDAV (Web-based Distributed Authoring and Versioning) criada pela RFC 2518 e atualizada na RFC 4918
+
+Um servidor WebDAV roda em cima da estrutura de um servidor HTTP "comum" e antes da RFC 4918 os códigos de status descritos na RFC 2616 eram utilizados para descrever os erros na requisição más, esta RFC (2616) não tinha códigos semanticamente descritivos para erros comuns as operação rotineiramente encontradas, por isso a necessidade de "adicionar" mais códigos de status a RFC 2616
+
+Este código de status descreve que o servidor compreende a solicitação, que não há erro na sintaxe mas não pode processá-la ... esta definição é descrita na seção 11.2
+
+Uma observação aqui: esta seção (11.2) "descreve um erro semântico como um exemplo, não como uma regra para o erro"
+
+O uso do código de status 422 não está vinculado (não tem obrigatoriedade) de ser usado exclusivamente por um sistema (servidor) WebDAV ou qualquer sistema de versionamento como pode ser visto na declaração da seção 12 - Uso de códigos de status HTTP
+
+Deixo aqui em livre tradução a parte substancial desta seção:
+
+Em geral, muitos códigos de status HTTP podem ser usados ​​em resposta a qualquer solicitação, não apenas nos casos descritos neste documento.
+
+...
+
+Não posso afirmar de maneira cabal por não encontrar uma definição más, códigos de status "devem/deveriam" ser tratados de maneira agnóstica ao sistema da aplicação alvo da requisição.
+
+Acredito que o código de status 422 deva ser o mais indicado para responder a questão porque se encaixa nos seguintes pontos:
+
+não há um erro do usuário explicito na sintaxe da requisição (ou seu conteúdo)
+
+o objetivo do pedido não é modificar o estado de um recurso existente
+
+o servidor compreende o que lhe foi enviado mas não pode concluir a operação
+
+o uso deste código não tem "obrigatoriedade" com WebDAV ou qualquer sistema de versão
+
+Conclusão:
+
+Dada as características da questão (não há um erro na requisição) evite o uso do código 400, embora tentador ele é genérico em demasia.
+
+Ir com o código 200 não seria errado mas a abordagem é o que de fato definiria sua relevância em relação aos outros códigos visto as circunstancias da questão.
+
+Evite o código 409 visto que o cadastro não tem por objetivo modificar um registro existente (entende-se aqui o registro como um recurso).
+
+Vá de 422 porque "não há impeditivo para usá-lo" e este é semanticamente mais coerente com o processo que ocorre na questão.
+

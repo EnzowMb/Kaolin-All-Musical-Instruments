@@ -65,6 +65,7 @@ export function Search() {
 
   const handleOKClick = () => {
     setIsInputEnabled(false);
+    setSearch("");
   };
 
   const [isInputEnabled, setIsInputEnabled] = useState(false);
@@ -84,8 +85,6 @@ export function Search() {
           instrumento.name.toLowerCase().startsWith(search.toLowerCase())
         )
       : [];
-
-  console.log(instrumentFilter.length);
 
   return (
     <Container>

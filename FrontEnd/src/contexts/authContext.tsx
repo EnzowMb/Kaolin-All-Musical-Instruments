@@ -7,6 +7,7 @@ import {
 } from "react";
 import axios from "axios";
 import { Instrument } from "../pages/type";
+import { Alert, Space } from "antd";
 
 type AuthContextProps = {
   login: (data: ILogin) => Promise<void>;
@@ -55,16 +56,23 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const [loading, setLoading] = useState<boolean>(true);
 
+  const [showAlert, setShowAlert] = useState(false);
+
+  const onClose = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setShowAlert(false);
+  };
+
   const login = async (data: ILogin) => {
-    const { data: response, status } = await axios.post(
-      "https://kaolin-all-instruments.uc.r.appspot.com/login",
-      data
-    );
-    if (status === 200) {
-      const userString = JSON.stringify({ ...response, ...data });
-      localStorage.setItem("user", userString);
-      setUser({ ...response, ...data });
-    }
+    await axios
+      .post("https://kaolin-all-instruments.uc.r.appspot.com/login", data)
+      .then((response) => {
+        const userString = JSON.stringify({ ...response.data, ...data });
+        localStorage.setItem("user", userString);
+        setUser({ ...response.data, ...data });
+      })
+      .catch(() => {
+        setShowAlert(true);
+      });
   };
 
   const logout = () => {
@@ -134,20 +142,34 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        login,
-        logout,
-        user,
-        loading,
-        createInstrument,
-        updateInstrument,
-        deleteInstrument,
-        updateUser,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <>
+      {showAlert && (
+        <Space direction="vertical" style={{ width: "100%" }}>
+          <Alert
+            message="Aviso!"
+            description="Usuario ou senha incorreto"
+            type="warning"
+            showIcon
+            closable
+            onClose={onClose}
+          />
+        </Space>
+      )}
+      <AuthContext.Provider
+        value={{
+          login,
+          logout,
+          user,
+          loading,
+          createInstrument,
+          updateInstrument,
+          deleteInstrument,
+          updateUser,
+        }}
+      >
+        {children}
+      </AuthContext.Provider>
+    </>
   );
 };
 

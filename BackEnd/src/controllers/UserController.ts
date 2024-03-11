@@ -21,7 +21,11 @@ export class UserController {
       });
       const userModel = new User(name, email, password);
       const newUser = await this.userService.createUser(userModel);
-      return res.status(201).json(newUser);
+      if (newUser) {
+        return res.status(201).json(newUser);
+      } else {
+        return res.status(422).json({ message: 'Usuario já existe!' });
+      }
     } catch (error: any) {
       return res.json(error);
     }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button";
 import styled from "styled-components";
@@ -82,7 +82,9 @@ export const Login: React.FC = () => {
 
   return (
     <>
-      <Image src={logo} alt="Logo Kaolin" />
+      <Link to="/">
+        <Image src={logo} alt="Logo Kaolin" />
+      </Link>
       <Title>Faça login em sua conta</Title>
       <Form onSubmit={handleLogin}>
         <TitledInput
@@ -92,6 +94,7 @@ export const Login: React.FC = () => {
           name="email"
           value={formData.email}
           onChange={handleChange}
+          required
         />
         <TitledInput
           label={"Senha"}
@@ -100,6 +103,7 @@ export const Login: React.FC = () => {
           name="password"
           value={formData.password}
           onChange={handleChange}
+          required
         />
         <CustomizedButton type="submit" label="Login" />
       </Form>

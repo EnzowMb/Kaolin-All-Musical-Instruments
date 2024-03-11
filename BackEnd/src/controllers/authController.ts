@@ -14,8 +14,6 @@ export class AuthController {
     try {
       const { email, password } = req.body as LoginType;
 
-      Validation.LoginSchema.parse({ email: email, password: password });
-
       const login = await this.authService.login({ email, password });
 
       if (login) {
@@ -28,7 +26,7 @@ export class AuthController {
         });
       } else {
         return res
-          .status(400)
+          .status(401)
           .send({ message: 'Usuario ou senha incorretos!' });
       }
     } catch (error) {

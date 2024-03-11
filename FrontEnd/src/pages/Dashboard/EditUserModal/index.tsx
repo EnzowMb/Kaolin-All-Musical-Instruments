@@ -7,6 +7,8 @@ import { useState } from "react";
 import { Button } from "../../../components/Button";
 import { usePut } from "../../../services/usePut";
 import { useAuth } from "../../../contexts/authContext";
+import { Validation } from "../../../services/Validation";
+import { Alert, Space } from "antd";
 
 const CustomizedBox = styled(Box)`
   position: fixed;
@@ -37,6 +39,14 @@ export default function EditUserModal({
 }) {
   const { user, updateUser } = useAuth();
   const { updateData } = usePut();
+
+  const [alertMessage, setAlertMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+
+  const onClose = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setShowAlert(false);
+  };
+
   if (!user) return <></>;
 
   const [formData, setFormData] = useState({
@@ -59,21 +69,30 @@ export default function EditUserModal({
       return;
     }
 
-    if (!isEmailValid(formData.email)) {
-      alert("Por favor, insira um endereço de e-mail válido.");
-      return;
-    }
-
-    const response = await updateData({
-      url: `user/${user.id}`,
-      data: formData,
-      token: user.acesstoken,
+    const result = Validation.UserSchema.safeParse({
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
     });
 
-    if (response?.status === 202) {
-      handleClose();
-      setIsInputEnabled(!isInputEnabled);
-      updateUser(user.id, response.data);
+    if (result.success) {
+      const response = await updateData({
+        url: `user/${user.id}`,
+        data: formData,
+        token: user.acesstoken,
+      });
+      if (response?.status === 202) {
+        handleClose();
+        setIsInputEnabled(!isInputEnabled);
+        updateUser(user.id, response.data);
+      }
+    } else {
+      let message = "Os seguintes alertas foram encontrados: ";
+      result.error.issues.forEach((issue) => {
+        message += issue.message + ";";
+      });
+      setAlertMessage(message);
+      setShowAlert(true);
     }
   };
 
@@ -85,11 +104,6 @@ export default function EditUserModal({
     });
   };
 
-  const isEmailValid = (email: string) => {
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    return emailRegex.test(email);
-  };
-
   return (
     <Modal
       open={open}
@@ -98,6 +112,18 @@ export default function EditUserModal({
       aria-describedby="Nesse modal terá os dados de cadastro do instrumento"
     >
       <CustomizedBox>
+        {showAlert && (
+          <Space direction="vertical" style={{ width: "100%" }}>
+            <Alert
+              message="Aviso!"
+              description={alertMessage}
+              type="warning"
+              showIcon
+              closable
+              onClose={onClose}
+            />
+          </Space>
+        )}
         <Title>Edite os dados do usuario:</Title>
         <form onSubmit={handleSubmit}>
           <TitledInput

@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { SuccessModal } from "../../components/SuccessModal";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { TitledInput } from "../../components/TitledInput";
 import { Button } from "../../components/Button";
@@ -8,6 +6,10 @@ import logo from "../../Img/Logo.png";
 import styled from "styled-components";
 import { Step, StepLabel, Stepper } from "@mui/material";
 import { usePost } from "../../services/usePost";
+import { Validation } from "../../services/Validation";
+import { SmileOutlined } from "@ant-design/icons";
+import { Alert, Space, Result } from "antd";
+import { Link } from "react-router-dom";
 
 const Image = styled.img`
   padding: 2em 0;
@@ -48,7 +50,14 @@ const CustomButton = styled(Button)`
 export const RegisterUser: React.FC = () => {
   const [activeStage, setActiveStage] = useState(0);
 
-  const { registerData, sucess, error } = usePost();
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const onClose = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setShowErrorAlert(false);
+    setShowAlert(false);
+  };
 
   const [formData, setFormData] = useState({
     name: "",
@@ -66,7 +75,21 @@ export const RegisterUser: React.FC = () => {
       return;
     }
 
-    setActiveStage(activeStage + 1);
+    const result = Validation.UserSchema.pick({ name: true }).safeParse({
+      name: formData.name,
+    });
+
+    if (result.success) {
+      setActiveStage(activeStage + 1);
+    } else {
+      result.error.errors.forEach((error) => {
+        if (error.path.includes("name")) {
+          setAlertMessage(error.message);
+          setShowAlert(true);
+        }
+      });
+      return;
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,16 +100,6 @@ export const RegisterUser: React.FC = () => {
     });
   };
 
-  const isEmailValid = (email: string) => {
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    return emailRegex.test(email);
-  };
-
-  const isPasswordValid = (password: string) => {
-    const passwordRegex = /^[A-Z0-9._%+-]{4,}$/;
-    return passwordRegex.test(password);
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -95,33 +108,67 @@ export const RegisterUser: React.FC = () => {
       return;
     }
 
-    if (!isEmailValid(formData.email)) {
-      alert("Por favor, insira um endereço de e-mail válido.");
-      return;
-    }
+    const result = Validation.UserSchema.safeParse({
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+    });
 
-    if (!isPasswordValid(formData.password)) {
-      alert("Por favor, insira uma senha válida.");
-      return;
-    }
-
-    axios
-      .post(
-        "https://kaolin-all-instruments.uc.r.appspot.com/user/create",
-        formData
-      )
-      .then((response) => {
-        console.log("Dados enviados com sucesso:", response.data);
-        setShowSuccessModal(true);
-      })
-      .catch((error) => {
-        console.error("Erro ao enviar os dados:", error);
+    if (result.success) {
+      await axios
+        .post(
+          "https://kaolin-all-instruments.uc.r.appspot.com/user/create",
+          formData
+        )
+        .then((response) => {
+          console.log("Dados enviados com sucesso:", response.data);
+          setShowSuccessModal(true);
+        })
+        .catch((error) => {
+          console.error("Erro ao enviar os dados " + error);
+          if (error.response.status === 422) {
+            setShowErrorAlert(true);
+          }
+        });
+    } else {
+      let message = "Os seguintes alertas foram encontrados: ";
+      result.error.issues.forEach((issue) => {
+        message += issue.message + ";";
       });
+      setAlertMessage(message);
+      setShowAlert(true);
+    }
   };
 
   return (
     <>
-      <Image src={logo} alt="Logo Kaolin" />
+      {showErrorAlert && (
+        <Space direction="vertical" style={{ width: "80%" }}>
+          <Alert
+            message="Algo deu errado!"
+            description="Usuario com este email já existe!"
+            type="error"
+            showIcon
+            closable
+            onClose={onClose}
+          />
+        </Space>
+      )}
+      {showAlert && (
+        <Space direction="vertical" style={{ width: "80%" }}>
+          <Alert
+            message="Aviso!"
+            description={alertMessage}
+            type="warning"
+            showIcon
+            closable
+            onClose={onClose}
+          />
+        </Space>
+      )}
+      <Link to="/">
+        <Image src={logo} alt="Logo Kaolin" />
+      </Link>
       <Stepper activeStep={activeStage}>
         <Step>
           <StepLabel
@@ -161,12 +208,20 @@ export const RegisterUser: React.FC = () => {
         </>
       ) : (
         <>
-          <Title>Agora, os dados técnicos:</Title>
           <Form onSubmit={handleSubmit}>
             {showSuccessModal ? (
-              <SuccessModal onClose={() => setShowSuccessModal(false)} />
+              <Result
+                icon={<SmileOutlined />}
+                title="Cadastrado com sucesso! Faça o login "
+                extra={
+                  <Link to={"/login"}>
+                    <Button label="Login"></Button>
+                  </Link>
+                }
+              />
             ) : (
               <>
+                <Title>Agora, os dados técnicos:</Title>
                 <TitledInput
                   label={"Email"}
                   type="email"

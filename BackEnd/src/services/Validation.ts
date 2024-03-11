@@ -15,13 +15,15 @@ const isDateValid = (value: string) => {
 export class Validation {
   static UserSchema = z.object({
     name: z
-      .string()
-      .min(3, { message: 'minimum 2 digits' })
-      .max(40, { message: 'maximum 40 digits' }),
+      .string({ required_error: 'Necessita de nome' })
+      .min(2, { message: 'Usuario deve ter pelo menos 2 digitos' })
+      .max(40, { message: 'Usuario deve ter no maximo 40 digitos' }),
     email: z
       .string({ required_error: 'Necessita de email' })
       .email({ message: 'Email invalido' }),
-    password: z.string().min(4, { message: 'minimum 4 digits' }),
+    password: z
+      .string({ required_error: 'Necessita de senha' })
+      .min(3, { message: 'Senha deve ter pelo menos 3 digitos' }),
   });
 
   static InstrumentSchema = z.object({
@@ -29,7 +31,7 @@ export class Validation {
       .string()
       .min(3, { message: 'minimum 2 digits' })
       .max(40, { message: 'maximum 40 digits' }),
-    family: z.nativeEnum(EfamilyInstrument),
+    //family: z.nativeEnum(EfamilyInstrument),
     date: z
       .string({ required_error: 'Necessita da data de criação' })
       .refine((value) => isDateValid(value), {
