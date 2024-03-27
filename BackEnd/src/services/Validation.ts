@@ -31,7 +31,7 @@ export class Validation {
       .string()
       .min(3, { message: 'minimum 2 digits' })
       .max(40, { message: 'maximum 40 digits' }),
-    //family: z.nativeEnum(EfamilyInstrument),
+    family: z.nativeEnum(EfamilyInstrument),
     date: z
       .string({ required_error: 'Necessita da data de criação' })
       .refine((value) => isDateValid(value), {
