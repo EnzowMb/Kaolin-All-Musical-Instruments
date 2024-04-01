@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import { decode, verify } from 'jsonwebtoken';
 
 import { jsonSecret } from '../jsonSecret';
-import { UserType } from '../services/Validation';
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
   const authToken = req.headers.authorization;
@@ -13,7 +12,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     try {
       verify(token, jsonSecret.secret);
 
-      const { email, name } = (await decode(token)) as UserType;
+      const { email, name } = (await decode(token)) as any;
 
       (req as any).usuarioEmail = email;
       (req as any).usuarioName = name;

@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
 import { AuthService } from '../services/authService';
-import { LoginType, Validation } from '../services/Validation';
 
 export class AuthController {
   authService: AuthService;
@@ -12,7 +11,7 @@ export class AuthController {
 
   login = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { email, password } = req.body as LoginType;
+      const { email, password } = req.body;
 
       const login = await this.authService.login({ email, password });
 

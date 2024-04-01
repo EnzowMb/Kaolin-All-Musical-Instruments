@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 
-import { InstrumentType, Validation } from '../services/Validation';
 import { Instrument } from '../model/InstrumentModel';
 import { InstrumentService } from '../services/InstrumentService';
 import { EfamilyInstrument } from '../model/EfamilyInstrument';
@@ -16,8 +15,7 @@ export class InstrumentController {
 
   createInstrument = async (req: Request, res: Response) => {
     try {
-      const { name, family, date, userEmail, description } =
-        req.body as InstrumentType;
+      const { name, family, date, userEmail, description } = req.body;
 
       const dateTime = giveCurrentDateTime();
 
@@ -44,15 +42,6 @@ export class InstrumentController {
 
       console.log('File sucessfully uploaded');
 
-      Validation.InstrumentSchema.parse({
-        name: name,
-        family: family,
-        date: date,
-        userEmail: userEmail,
-        description: description,
-        img: downloadURL,
-      });
-
       const instrumentModel = new Instrument(
         name,
         family,
@@ -74,16 +63,7 @@ export class InstrumentController {
   updateInstrument = async (req: Request, res: Response) => {
     try {
       const id = req.params.id;
-      const { name, family, date, userEmail, description } =
-        req.body as InstrumentType;
-
-      Validation.InstrumentSchema.parse({
-        name: name,
-        family: family,
-        date: date,
-        userEmail: userEmail,
-        description: description,
-      });
+      const { name, family, date, userEmail, description } = req.body;
 
       const instrumentModel = new Instrument(
         name,

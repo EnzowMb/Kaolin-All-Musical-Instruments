@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 
 import { UserService } from '../services/UserService';
-import { UserType, Validation } from '../services/Validation';
 import { User } from '../model/UserModel';
 
 export class UserController {
@@ -13,13 +12,10 @@ export class UserController {
 
   createUser = async (req: Request, res: Response) => {
     try {
-      const { name, email, password } = req.body as UserType;
-      Validation.UserSchema.parse({
-        name: name,
-        email: email,
-        password: password,
-      });
+      const { name, email, password } = req.body;
+
       const userModel = new User(name, email, password);
+
       const newUser = await this.userService.createUser(userModel);
       if (newUser) {
         return res.status(201).json(newUser);
@@ -53,12 +49,9 @@ export class UserController {
   updateUser = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const { name, email, password } = req.body as UserType;
-      Validation.UserSchema.parse({
-        name: name,
-        email: email,
-        password: password,
-      });
+
+      const { name, email, password } = req.body;
+
       const userModel = new User(name, email, password);
       const user = await this.userService.updateUser(userModel, id);
       return res.status(202).json(user);
